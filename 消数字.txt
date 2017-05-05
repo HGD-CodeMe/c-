@@ -1,0 +1,144 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
+namespace WindowsFormsApplication2
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+       
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+
+            Random r = new Random();
+            button1.Top += 10;
+            if (button1.Top > 30)
+            {
+                timer2.Start();
+            }
+            if (button1.Top > this.Height)
+            {
+                button1.Top = 0;
+                button1.Visible = true;
+                //这里使用一个空字符串进行强制转换
+                button1.Text = (char)r.Next(97, 122) + "";
+            }
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            Random r = new Random();
+            button2.Top += 10;
+            if (button2.Top > 30)
+            {
+                timer3.Start();
+            }
+            if (button2.Top > this.Height)
+            {
+                button2.Top = 0;
+                button2.Visible = true;
+                //这里使用一个空字符串进行强制转换
+                button2.Text = (char)r.Next(97, 122) + "";
+            }
+
+        }
+        private void timer3_Tick(object sender, EventArgs e)
+        {
+            Random r = new Random();
+            button3.Top += 10;
+            if (button3.Top > 30)
+            {
+                timer4.Start();
+            }
+            if (button3.Top > this.Height)
+            {
+                button3.Top = 0;
+                button3.Visible = true;
+                //这里使用一个空字符串进行强制转换
+                button3.Text = (char)r.Next(97, 122) + "";
+            }
+        }
+
+        private void timer4_Tick(object sender, EventArgs e)
+        {
+            Random r = new Random();
+            button4.Top += 10;
+            if (button4.Top > 30)
+            {
+                timer5.Start();
+            }
+            if (button4.Top > this.Height)
+            {
+                button4.Top = 0;
+                button4.Visible = true;
+                //这里使用一个空字符串进行强制转换
+                button4.Text = (char)r.Next(97, 122) + "";
+            }
+        }
+
+        private void timer5_Tick(object sender, EventArgs e)
+        {
+            Random r = new Random();
+            button5.Top += 10;
+            if (button5.Top > this.Height)
+            {
+                button5.Top = 0;
+                button5.Visible = true;
+                //这里使用一个空字符串进行强制转换
+                button5.Text = (char)r.Next(97, 122) + "";
+            }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            timer1.Start();
+        }
+
+        int count = 0;    
+
+       private void Form1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar.ToString().Equals(button1.Text))
+            {
+
+                button1.Visible = false;
+                count++;
+            }
+
+            if (e.KeyChar.ToString().Equals(button2.Text))
+            {
+                button2.Visible = false;
+                count++;
+            }
+
+            if (e.KeyChar.ToString().Equals(button3.Text))
+            {
+                button3.Visible = false;
+                count++;
+            }
+
+
+            if (e.KeyChar.ToString().Equals(button4.Text))
+            {
+                this.button4.Visible = false;
+                count++;
+            }
+
+            if (e.KeyChar.ToString().Equals(button5.Text))
+            {
+                button5.Visible = false;
+                count++;
+            }
+        }
+    }
+}
