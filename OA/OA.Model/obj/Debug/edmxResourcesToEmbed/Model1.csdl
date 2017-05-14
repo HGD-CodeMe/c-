@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="OAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="ActionInfo">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="SubTime" Type="DateTime" Precision="3" />
+    <Property Name="DelFlag" Type="Int16" />
+    <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+    <Property Name="Remark" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Url" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="HttpMethod" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="ActionMethodName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="ControllerName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="ActionInfoName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Sort" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Name="ActionTypeEnum" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="MenuIcon" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Department" Relationship="Self.Department_action" FromRole="ActionInfo" ToRole="Department" />
+    <NavigationProperty Name="RoleInfo" Relationship="Self.role_function" FromRole="ActionInfo" ToRole="RoleInfo" />
+  </EntityType>
+  <EntityType Name="Department">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="DepName" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <Property Name="ParentId" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Name="TreePath" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <Property Name="Level" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+    <Property Name="IsLeaf" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="UserInfo" Relationship="Self.FK_Reference_6" FromRole="Department" ToRole="UserInfo" />
+    <NavigationProperty Name="ActionInfo" Relationship="Self.Department_action" FromRole="Department" ToRole="ActionInfo" />
+  </EntityType>
+  <EntityType Name="RoleInfo">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="RoleName" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <Property Name="DelFlag" Type="Int16" />
+    <Property Name="SubTime" Type="DateTime" Precision="3" />
+    <Property Name="Remark" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+    <Property Name="Sort" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="ActionInfo" Relationship="Self.role_function" FromRole="RoleInfo" ToRole="ActionInfo" />
+    <NavigationProperty Name="UserInfo" Relationship="Self.UserInfo_role" FromRole="RoleInfo" ToRole="UserInfo" />
+  </EntityType>
+  <EntityType Name="UserInfo">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="Dep_ID" Type="Int32" />
+    <Property Name="UName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="UPwd" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <Property Name="SubTime" Type="DateTime" Precision="3" />
+    <Property Name="DelFlag" Type="Int16" />
+    <Property Name="ModeifiedOn" Type="DateTime" Precision="3" />
+    <Property Name="Remark" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Sort" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Department" Relationship="Self.FK_Reference_6" FromRole="UserInfo" ToRole="Department" />
+    <NavigationProperty Name="RoleInfo" Relationship="Self.UserInfo_role" FromRole="UserInfo" ToRole="RoleInfo" />
+  </EntityType>
+  <Association Name="FK_Reference_6">
+    <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+    <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="UserInfo">
+        <PropertyRef Name="Dep_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Department_action">
+    <End Role="Department" Type="Self.Department" Multiplicity="*" />
+    <End Role="ActionInfo" Type="Self.ActionInfo" Multiplicity="*" />
+  </Association>
+  <Association Name="role_function">
+    <End Role="ActionInfo" Type="Self.ActionInfo" Multiplicity="*" />
+    <End Role="RoleInfo" Type="Self.RoleInfo" Multiplicity="*" />
+  </Association>
+  <Association Name="UserInfo_role">
+    <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="*" />
+    <End Role="RoleInfo" Type="Self.RoleInfo" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="OAEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="ActionInfo" EntityType="Self.ActionInfo" />
+    <EntitySet Name="Department" EntityType="Self.Department" />
+    <EntitySet Name="RoleInfo" EntityType="Self.RoleInfo" />
+    <EntitySet Name="UserInfo" EntityType="Self.UserInfo" />
+    <AssociationSet Name="FK_Reference_6" Association="Self.FK_Reference_6">
+      <End Role="Department" EntitySet="Department" />
+      <End Role="UserInfo" EntitySet="UserInfo" />
+    </AssociationSet>
+    <AssociationSet Name="Department_action" Association="Self.Department_action">
+      <End Role="Department" EntitySet="Department" />
+      <End Role="ActionInfo" EntitySet="ActionInfo" />
+    </AssociationSet>
+    <AssociationSet Name="role_function" Association="Self.role_function">
+      <End Role="ActionInfo" EntitySet="ActionInfo" />
+      <End Role="RoleInfo" EntitySet="RoleInfo" />
+    </AssociationSet>
+    <AssociationSet Name="UserInfo_role" Association="Self.UserInfo_role">
+      <End Role="UserInfo" EntitySet="UserInfo" />
+      <End Role="RoleInfo" EntitySet="RoleInfo" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,14 @@
+E:\C#\OA\OA.Model\bin\Debug\OA.Model.dll.config
+E:\C#\OA\OA.Model\bin\Debug\OA.Model.dll
+E:\C#\OA\OA.Model\bin\Debug\OA.Model.pdb
+E:\C#\OA\OA.Model\bin\Debug\EntityFramework.dll
+E:\C#\OA\OA.Model\bin\Debug\EntityFramework.SqlServer.dll
+E:\C#\OA\OA.Model\bin\Debug\EntityFramework.xml
+E:\C#\OA\OA.Model\bin\Debug\EntityFramework.SqlServer.xml
+E:\C#\OA\OA.Model\bin\Debug\zh-Hans\EntityFramework.resources.dll
+E:\C#\OA\OA.Model\bin\Debug\zh-Hans\EntityFramework.SqlServer.resources.dll
+E:\C#\OA\OA.Model\obj\Debug\OA.Model.dll
+E:\C#\OA\OA.Model\obj\Debug\OA.Model.pdb
+E:\C#\OA\OA.Model\bin\Debug\Newtonsoft.Json.dll
+E:\C#\OA\OA.Model\bin\Debug\Newtonsoft.Json.xml
+E:\C#\OA\OA.Model\obj\Debug\OA.Model.csprojResolveAssemblyReference.cache
