@@ -25,7 +25,27 @@ namespace OA.IDAL
       
     }
 	
+	public partial interface Iuser_actionDal :IBaseDal<user_action>
+    {
+      
+    }
+	
 	public partial interface IUserInfoDal :IBaseDal<UserInfo>
+    {
+      
+    }
+	
+	public partial interface IWF_InstanceDal :IBaseDal<WF_Instance>
+    {
+      
+    }
+	
+	public partial interface IWF_StepInfoDal :IBaseDal<WF_StepInfo>
+    {
+      
+    }
+	
+	public partial interface IWF_TempDal :IBaseDal<WF_Temp>
     {
       
     }

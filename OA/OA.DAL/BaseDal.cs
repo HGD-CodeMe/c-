@@ -21,7 +21,8 @@ namespace OA.DAL
         public T AddEntity(T entity)
         {
             Db.Set<T>().Add(entity);
-           // Db.SaveChanges();
+            // Db.SaveChanges();
+            this.Db.SaveChanges();
             return entity;
         }
 
@@ -33,7 +34,8 @@ namespace OA.DAL
         public bool DeleteEntity(T entity)
         {
             Db.Entry<T>(entity).State = System.Data.Entity.EntityState.Deleted;
-            // return Db.SaveChanges() > 0;
+            //return Db.SaveChanges() > 0;
+            this.Db.SaveChanges();
             return true;
         }
 
@@ -46,6 +48,7 @@ namespace OA.DAL
         {
             Db.Entry<T>(entity).State = System.Data.Entity.EntityState.Modified;
             //return Db.SaveChanges() > 0;
+            this.Db.SaveChanges();
             return true;//在EF上下文中打下标记
         }
 
@@ -56,7 +59,7 @@ namespace OA.DAL
         /// <returns></returns>
         public IQueryable<T> LoadEntities(System.Linq.Expressions.Expression<Func<T, bool>> whereLambda)
         {
-            //由于这里方法不能替换为泛型，需要借助一下db的set方法
+            //由于这里方法不能替换为泛型，需要借助一下db的set方法ss
             return Db.Set<T>().Where<T>(whereLambda);
         }
 

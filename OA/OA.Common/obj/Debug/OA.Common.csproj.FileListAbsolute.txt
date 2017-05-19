@@ -1,7 +1,7 @@
 E:\C#\OA\OA.Common\bin\Debug\OA.Common.dll
 E:\C#\OA\OA.Common\bin\Debug\OA.Common.pdb
-E:\C#\OA\OA.Common\obj\Debug\OA.Common.dll
-E:\C#\OA\OA.Common\obj\Debug\OA.Common.pdb
 E:\C#\OA\OA.Common\bin\Debug\Newtonsoft.Json.dll
 E:\C#\OA\OA.Common\bin\Debug\Newtonsoft.Json.xml
+E:\C#\OA\OA.Common\obj\Debug\OA.Common.dll
+E:\C#\OA\OA.Common\obj\Debug\OA.Common.pdb
 E:\C#\OA\OA.Common\obj\Debug\OA.Common.csprojResolveAssemblyReference.cache

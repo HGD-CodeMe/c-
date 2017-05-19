@@ -11,7 +11,7 @@ using static OA.BLL.UserInfoService;
 
 namespace OA.WebApp.Controllers
 {
-    public class ActionInfoController : Controller
+    public class ActionInfoController : BaseController
     {
         // GET: ActionInfo
         IBLL.IActionInfoService ActionInfoService = new ActionInfoService();

@@ -1,0 +1,147 @@
+﻿
+@{
+    Layout = null;
+}
+@using OA.Model
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/jquery.easyui.min.js"></script>
+    <link href="~/Content/tableStyle.css" rel="stylesheet" />
+
+   
+<title>SetUserActionInfo</title>
+</head>
+<body>
+    <div> 
+        为用户@{ 
+            UserInfo userInfo = ViewBag.userInfo;
+            <span style="font-size:14px;color:red"></span>
+            @userInfo.UName
+        }分配权限
+
+        <table>
+            <tr>
+                <th>权限编号</th>
+                <th>权限名称</th>
+                <th>地址</th>
+                <th>请求方式</th>
+                <th>操作</th>
+            </tr>
+
+            @{ 
+                List<ActionInfo> ActionInfoList = ViewBag.ActionList;
+                List<user_action> ActionIdList = ViewBag.ActionIdList;
+                foreach(ActionInfo actionInfo in ActionInfoList)
+                {
+                    var rb_name = "cba_" + actionInfo.ID;
+                    var norb_name = "rocba_" + actionInfo.ID;
+                    <tr>
+                        <td>@actionInfo.ID</td>
+                        <td>@actionInfo.ActionInfoName</td>
+                        <td>@actionInfo.Url</td>
+                        <td>@actionInfo.HttpMethod</td>
+                        <td>
+                            @{ 
+                                var isExt = (from a in ActionIdList
+                                             where a.Act_ID == actionInfo.ID
+                                             select a).FirstOrDefault();
+
+                                if(isExt != null)
+                                {
+                                    if(isExt.isPass == true)
+                                    {
+                                        <label for="@rb_name">允许</label>
+                                        <input type="radio" value="true"
+                                               class="selectActions" checked="checked" ids="@actionInfo.ID" id="@rb_name" name="@rb_name"/>
+
+                                        <label for="@norb_name">禁止</label>
+                                        <input type="radio" value="false"
+                                               class="selectActions" ids="@actionInfo.ID" id="@norb_name" name="@rb_name"/>
+                                    }
+                                    else
+                                    {
+                                        <label for="@rb_name">允许</label>
+                                        <input type="radio" value="true"
+                                               class="selectActions"  ids="@actionInfo.ID" name="@rb_name"  id="@rb_name"/>
+
+                                       <label for="@norb_name">禁止</label>
+                                       <input type="radio" value="false"
+                                               class="selectActions" ids="@actionInfo.ID" id="@norb_name" name="@rb_name" >
+                                    }
+                                }
+                                else
+                                {
+                                    <label for="@rb_name">允许</label>
+                                    <input type="radio" value="true"
+                                        class="selectActions" ids="@actionInfo.ID" name="@rb_name" id="@rb_name"/>
+
+                                   <label for="@norb_name">禁止</label>
+                                   <input type="radio" value="false"
+                                        class="selectActions" ids="@actionInfo.ID" id="@norb_name" name="@rb_name">
+                                }
+                                <input type="button" value="清除" class="btnClear"  ids="@actionInfo.ID"/>
+                            } 
+                        </td>
+                    </tr>
+                }
+            }
+
+
+        </table>
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+        $(function () {
+            $(".selectActions").click(function () {
+                var $control = $(this);
+                $.post("/UserInfo/SetActionUser", {
+                    "userId": "@userInfo.id",
+                    "actionId": $control.attr("ids"),
+                    "value": $control.val()
+                }, function (data) {
+                    if (data == "ok") {
+                        $.messager.show({
+                            title: '提示',
+                            msg: '权限分配成功',
+                            showType: 'show'
+                        });
+                    } else {
+                        $.messager.show({
+                            title: '提示',
+                            msg: '权限分配失败',
+                            showType: 'show'
+                        });
+                    }
+
+                });
+            });
+
+            $(".btnClear").click(function () {
+                var $control = $(this);
+
+                $.post("/UserInfo/ClearUserAction", { "userId": '@userInfo.id', "actionId": $control.attr("ids") },
+                    function (data) {
+                        if (data == "ok") {
+                            $control.parent().find(".selecAtions").removeAttr("checked");
+                            $.messager.show({
+                                title: '提示',
+                                msg: '权限清除成功',
+                                showType: 'show'
+                            });
+                        } else {
+                            $.messager.show({
+                                title: '提示',
+                                msg: '权限清除失败',
+                                showType: 'show'
+                            });
+                        }
+                });
+            });
+        });
+</script>

@@ -12,7 +12,7 @@ using static OA.BLL.UserInfoService;
 
 namespace OA.WebApp.Controllers
 {
-    public class RoleInfoController : Controller
+    public class RoleInfoController : BaseController
     {
         // GET: RoleInfo
         IBLL.IRoleInfoService RoleInfoService = new RoleInfoService();

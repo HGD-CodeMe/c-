@@ -168,8 +168,8 @@
             { icon: '/Content/lib/images/3DSMAX.png', title: '用户管理', url: '/UserInfo/Index' },
             { icon: '/Content/lib/images/3DSMAX.png', title: '角色管理', url: '/RoleInfo/Index' },
             { icon: '/Content/lib/images/3DSMAX.png', title: '权限管理', url:'/ActionInfo/Index' },
-            { icon: 'images/Program Files Folder.png', title: '固定列', url: '../grid/frozen/frozengrid.htm' },
-            { icon: 'images/Program Files Folder.png', title: '可拖动', url: '../base/drag.htm' },
+            { icon: 'images/Program Files Folder.png', title: '创建流程模板', url: '/WfTemp/Index' },
+            { icon: 'images/Program Files Folder.png', title: '发起流程', url: '/WfInstance/Index' },
             { icon: 'images/Alien Folder.png', title: '树', url: '../tree/draggable.htm' },
             { icon: 'images/Xp-G5 006.png', title: '下拉框', url: '../comboBox/comboBoxGrid.htm' },
             { icon: 'images/Xp-G5 006.png', title: '下拉框', url: '../comboBox/comboBoxGrid.htm' },
@@ -220,6 +220,11 @@
     $.ligerui.win.removeTaskbar = function () { }; //不允许移除
     $.ligerui.win.createTaskbar(); //页面加载时创建任务栏
 
+    //校验用户的登录信息
+    //$.getJSON("/Home/GetMenus", {}, function (data) {
+    //    links = data;
+       
+    //});
     linksInit();
     onResize();
 

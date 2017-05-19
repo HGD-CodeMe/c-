@@ -1,0 +1,109 @@
+﻿@model OA.Model.WF_Temp
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>createTemp</title>
+    <script src="~/Scripts/kindeditor-all-min.js"></script>
+    <script src="../../Content/kinder/kindereditor-min.js"></script>
+    <link rel="stylesheet"  href="../../Content/kinder/themes/default/default.css"/>
+    <link rel="stylesheet" href="../../Content/kinder/plugins/code/prettify.css" />
+    <script charset="utf-8" src="../../Content/kinder/kindeditor.js" ></script>
+    <script charset="utf-8" src="../../Content/kinder/lang/zh_CN.js"></script>
+    
+    <script>
+        Kinder.ready(function(k) {
+            var editor1 = k.create("#TempDescript", {
+                cssPath:'../../Content/kinder/plugins/code/prettify.css',
+                uploadJson:'../../Content/kinder/asp.net/upload_json.ashx',
+                fileManagerJson:'../../Content/kinder/asp.net/file_manager_json.ashx',
+                allowFileManager:true,
+                alterCreate:function() {
+                    var self = this;
+                }
+        
+            });
+
+
+            var editor2 = k.create("#TempForm", {
+                cssPath: '../../Content/kinder/plugins/code/prettify.css',
+                uploadJson: '../../Content/kinder/asp.net/upload_json.ashx',
+                fileManagerJson: '../../Content/kinder/asp.net/file_manager_json.ashx',
+                allowFileManager: true,
+                alterCreate: function () {
+                    var self = this;
+                }
+
+            });
+
+            prettyPrint();
+        });
+
+    </script>
+</head>
+<body>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>流程模板</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.TempName, "模板名", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.TempName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.TempName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Remark,"备注",htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Remark, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Remark, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.TempDescript, "模板详情", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+
+                    <textarea cols="60" id="TempDescript" style="width: 600px; height: 300px;" name="TempDescript"
+                            >
+                        </textarea>
+                        @Html.ValidationMessageFor(model => model.TempDescript, "", new { @class = "text-danger" })
+            </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.TempForm, "申请表单模板", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <textarea cols="60" id="TempForm" style="width: 600px; height: 300px;" name="TempForm"
+                              ></textarea>
+                    @Html.ValidationMessageFor(model => model.TempForm, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="创建模板" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("回到模板列表", "Index")
+    </div>
+</body>
+</html>

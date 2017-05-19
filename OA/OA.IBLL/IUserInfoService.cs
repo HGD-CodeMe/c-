@@ -15,6 +15,8 @@ namespace OA.IBLL
         IQueryable<UserInfo> LoadSerachEntities(UserInfoParam userInfoSerachParam);
 
         bool SetOrderInfo(int userId, List<int> list);
+
+        bool SetUserActionInfo(int userId, int actionId, bool isPass);
     }
 
 }

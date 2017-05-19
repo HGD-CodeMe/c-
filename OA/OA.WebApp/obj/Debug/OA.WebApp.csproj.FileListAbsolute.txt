@@ -113,3 +113,5 @@ E:\C#\OA\OA.WebApp\bin\zh-Hans\Microsoft.Owin.Security.MicrosoftAccount.resource
 E:\C#\OA\OA.WebApp\obj\Debug\OA.WebApp.csprojResolveAssemblyReference.cache
 E:\C#\OA\OA.WebApp\obj\Debug\OA.WebApp.dll
 E:\C#\OA\OA.WebApp\obj\Debug\OA.WebApp.pdb
+E:\C#\OA\OA.WebApp\bin\Workflow.dll
+E:\C#\OA\OA.WebApp\bin\Workflow.pdb

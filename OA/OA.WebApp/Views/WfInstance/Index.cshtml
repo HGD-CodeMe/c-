@@ -1,0 +1,25 @@
+﻿@model OA.Model.WF_Instance
+
+@{
+    Layout = null;
+}
+@using OA.Model;
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div> 
+        @if (ViewData["list"] != null)
+            {
+                foreach (var temp in (List<WF_Temp>)ViewData["list"])
+                {
+                    <a href="/WfInstance/StartWorkflow/?id=@temp.ID">@temp.TempName</a><br/>
+            }
+        }
+    </div>
+</body>
+</html>

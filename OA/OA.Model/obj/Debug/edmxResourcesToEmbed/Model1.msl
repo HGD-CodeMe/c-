@@ -45,6 +45,16 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="user_action">
+      <EntityTypeMapping TypeName="OAModel.user_action">
+        <MappingFragment StoreEntitySet="user_action">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+          <ScalarProperty Name="Act_ID" ColumnName="Act_ID" />
+          <ScalarProperty Name="isPass" ColumnName="isPass" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="UserInfo">
       <EntityTypeMapping TypeName="OAModel.UserInfo">
         <MappingFragment StoreEntitySet="UserInfo">
@@ -61,14 +71,14 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <AssociationSetMapping Name="Department_action" TypeName="OAModel.Department_action" StoreEntitySet="Department_action">
-      <EndProperty Name="Department">
-        <ScalarProperty Name="ID" ColumnName="ID" />
-      </EndProperty>
       <EndProperty Name="ActionInfo">
         <ScalarProperty Name="ID" ColumnName="Act_ID" />
       </EndProperty>
+      <EndProperty Name="Department">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="role_function" TypeName="OAModel.role_function" StoreEntitySet="role_function">
+    <AssociationSetMapping Name="role_action" TypeName="OAModel.role_action" StoreEntitySet="role_action">
       <EndProperty Name="ActionInfo">
         <ScalarProperty Name="ID" ColumnName="action_id" />
       </EndProperty>
@@ -76,13 +86,69 @@
         <ScalarProperty Name="ID" ColumnName="role_id" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="UserInfo_role" TypeName="OAModel.UserInfo_role" StoreEntitySet="UserInfo_role">
-      <EndProperty Name="UserInfo">
-        <ScalarProperty Name="id" ColumnName="user_id" />
-      </EndProperty>
+    <AssociationSetMapping Name="user_role" TypeName="OAModel.user_role" StoreEntitySet="user_role">
       <EndProperty Name="RoleInfo">
         <ScalarProperty Name="ID" ColumnName="role_id" />
       </EndProperty>
+      <EndProperty Name="UserInfo">
+        <ScalarProperty Name="id" ColumnName="user_id" />
+      </EndProperty>
     </AssociationSetMapping>
+    <EntitySetMapping Name="WF_StepInfo">
+      <EntityTypeMapping TypeName="OAModel.WF_StepInfo">
+        <MappingFragment StoreEntitySet="WF_StepInfo">
+          <ScalarProperty Name="ProcessBy" ColumnName="ProcessBy" />
+          <ScalarProperty Name="IsEndStep" ColumnName="IsEndStep" />
+          <ScalarProperty Name="ChildStepID" ColumnName="ChildStepID" />
+          <ScalarProperty Name="ParentStepID" ColumnName="ParentStepID" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="ProcessTime" ColumnName="ProcessTime" />
+          <ScalarProperty Name="SubTime" ColumnName="SubTime" />
+          <ScalarProperty Name="DelFlag" ColumnName="DelFlag" />
+          <ScalarProperty Name="StepResult" ColumnName="StepResult" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="IsStartStep" ColumnName="IsStartStep" />
+          <ScalarProperty Name="IsProcessed" ColumnName="IsProcessed" />
+          <ScalarProperty Name="StepName" ColumnName="StepName" />
+          <ScalarProperty Name="WF_InstanceID" ColumnName="WF_InstanceID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WF_Temp">
+      <EntityTypeMapping TypeName="OAModel.WF_Temp">
+        <MappingFragment StoreEntitySet="WF_Temp">
+          <ScalarProperty Name="SubBy" ColumnName="SubBy" />
+          <ScalarProperty Name="TempStatue" ColumnName="TempStatue" />
+          <ScalarProperty Name="TempForm" ColumnName="TempForm" />
+          <ScalarProperty Name="TempDescript" ColumnName="TempDescript" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="DelFlag" ColumnName="DelFlag" />
+          <ScalarProperty Name="ModfiedOn" ColumnName="ModfiedOn" />
+          <ScalarProperty Name="SubTime" ColumnName="SubTime" />
+          <ScalarProperty Name="TempName" ColumnName="TempName" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WF_Instance">
+      <EntityTypeMapping TypeName="OAModel.WF_Instance">
+        <MappingFragment StoreEntitySet="WF_Instance">
+          <ScalarProperty Name="Temp_Instance" ColumnName="Temp_Instance" />
+          <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+          <ScalarProperty Name="WF_TempID" ColumnName="WF_TempID" />
+          <ScalarProperty Name="Result" ColumnName="Result" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="SubForm" ColumnName="SubForm" />
+          <ScalarProperty Name="Level" ColumnName="Level" />
+          <ScalarProperty Name="StartedBy" ColumnName="StartedBy" />
+          <ScalarProperty Name="SubTime" ColumnName="SubTime" />
+          <ScalarProperty Name="InstanceName" ColumnName="InstanceName" />
+          <ScalarProperty Name="Info_Instance" ColumnName="Info_Instance" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

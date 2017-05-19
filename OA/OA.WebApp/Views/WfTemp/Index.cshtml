@@ -1,0 +1,42 @@
+﻿
+@{
+    Layout = null;
+}
+@using OA.Model;
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/tableStyle.css" rel="stylesheet" />
+    <title>流程模板</title>
+</head>
+<body>
+    <a href="/WfTemp/createTemp">创建模板</a>
+    <div> 
+        <table>
+            <tr>
+                <th>模板编号</th>
+                <th>模板名</th>
+                <th>创建时间</th>
+                <th>备注</th>
+                <th>流程状态</th>
+            </tr>
+
+            @if (ViewData["list"] != null)
+            {
+                foreach (var temp in (List<WF_Temp>) ViewData["list"])
+                {
+                    <tr>
+                        <td>@temp.ID</td>
+                        <td>@temp.TempName</td>
+                        <td>@temp.SubTime</td>
+                        <td>@temp.Remark</td>
+                        <td>@temp.TempStatue</td>
+                    </tr>
+                }
+            }
+        </table>
+    </div>
+</body>
+</html>

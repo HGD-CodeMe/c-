@@ -1,0 +1,65 @@
+﻿
+@{
+    Layout = null;
+}
+@using OA.Model;
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link href="~/Content/tableStyle.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width" />
+    <title>发起流程</title>
+</head>
+<body>
+    <div> 
+        发起@{
+            WF_Temp temp = ViewBag.Temp;
+            @temp.TempName;
+         }
+        @using (Html.BeginForm()) { 
+            <input type="hidden" value="@temp.ID" name="hiddenTempId"/>
+        <table>
+            <tr>
+               <td>流程标题</td>
+               <td><input type="text" name="InstanceName"/></td>
+            </tr>
+            <tr>
+                <td>紧急程度</td>
+                <td>
+                    <select name="Level">
+                        <option value="0">一般</option>
+                        <option value="1">紧急</option>
+                        <option value="2">速办</option>
+                    </select>
+                </td>
+            </tr>
+            
+            
+            <tr>
+                <td>
+                    申请内容
+                </td>
+
+                <td>
+                    <textarea cols="60" id="SubForm" style="width: 600px; height: 300px;" name="SubForm">
+                        @temp.TempForm
+                    </textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    流转到
+                </td>
+                <td>
+                    <!--如果这里名字和控制器中的一样，则可以自动装配-->
+                    @Html.DropDownList("FlowTo")
+                </td>
+            </tr>
+        </table>
+
+        <input type="submit" vaule="发起流程"/>
+        }
+    </div>
+</body>
+</html>

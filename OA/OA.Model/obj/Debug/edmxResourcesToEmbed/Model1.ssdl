@@ -37,7 +37,7 @@
     <Property Name="ID" Type="int" Nullable="false" />
     <Property Name="Act_ID" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="role_function">
+  <EntityType Name="role_action">
     <Key>
       <PropertyRef Name="role_id" />
       <PropertyRef Name="action_id" />
@@ -57,6 +57,23 @@
     <Property Name="ModifiedOn" Type="datetime" />
     <Property Name="Sort" Type="varchar" MaxLength="16" />
   </EntityType>
+  <EntityType Name="user_action">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="User_ID" Type="int" Nullable="false" />
+    <Property Name="Act_ID" Type="int" Nullable="false" />
+    <Property Name="isPass" Type="bit" />
+  </EntityType>
+  <EntityType Name="user_role">
+    <Key>
+      <PropertyRef Name="user_id" />
+      <PropertyRef Name="role_id" />
+    </Key>
+    <Property Name="user_id" Type="int" Nullable="false" />
+    <Property Name="role_id" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="UserInfo">
     <Key>
       <PropertyRef Name="id" />
@@ -71,87 +88,60 @@
     <Property Name="Remark" Type="varchar" MaxLength="255" />
     <Property Name="Sort" Type="varchar" MaxLength="16" />
   </EntityType>
-  <EntityType Name="UserInfo_role">
+  <EntityType Name="WF_Instance">
     <Key>
-      <PropertyRef Name="user_id" />
-      <PropertyRef Name="role_id" />
+      <PropertyRef Name="ID" />
     </Key>
-    <Property Name="user_id" Type="int" Nullable="false" />
-    <Property Name="role_id" Type="int" Nullable="false" />
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Info_Instance" Type="int" />
+    <Property Name="InstanceName" Type="varchar" MaxLength="32" />
+    <Property Name="SubTime" Type="datetime" />
+    <Property Name="StartedBy" Type="varchar" MaxLength="32" />
+    <Property Name="Level" Type="varchar" MaxLength="32" />
+    <Property Name="SubForm" Type="varchar(max)" />
+    <Property Name="Status" Type="varchar" MaxLength="32" />
+    <Property Name="Result" Type="varchar" MaxLength="32" />
+    <Property Name="WF_TempID" Type="int" />
+    <Property Name="ApplicationId" Type="int" />
+    <Property Name="Temp_Instance" Type="int" Nullable="false" />
   </EntityType>
-  <Association Name="FK_Reference_2">
-    <End Role="ActionInfo" Type="Self.ActionInfo" Multiplicity="1" />
-    <End Role="role_function" Type="Self.role_function" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ActionInfo">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="role_function">
-        <PropertyRef Name="action_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Reference_3">
-    <End Role="RoleInfo" Type="Self.RoleInfo" Multiplicity="1" />
-    <End Role="role_function" Type="Self.role_function" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="RoleInfo">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="role_function">
-        <PropertyRef Name="role_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Reference_4">
-    <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="1" />
-    <End Role="UserInfo_role" Type="Self.UserInfo_role" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="UserInfo">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="UserInfo_role">
-        <PropertyRef Name="user_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Reference_5">
-    <End Role="RoleInfo" Type="Self.RoleInfo" Multiplicity="1" />
-    <End Role="UserInfo_role" Type="Self.UserInfo_role" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="RoleInfo">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="UserInfo_role">
-        <PropertyRef Name="role_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Reference_6">
-    <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
-    <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Department">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="UserInfo">
-        <PropertyRef Name="Dep_ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Reference_7">
-    <End Role="Department" Type="Self.Department" Multiplicity="1" />
-    <End Role="Department_action" Type="Self.Department_action" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Department">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Department_action">
-        <PropertyRef Name="ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Reference_8">
+  <EntityType Name="WF_StepInfo">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="WF_InstanceID" Type="int" />
+    <Property Name="StepName" Type="varchar" MaxLength="32" />
+    <Property Name="IsProcessed" Type="bit" />
+    <Property Name="IsStartStep" Type="bit" />
+    <Property Name="Title" Type="varchar(max)" />
+    <Property Name="Comment" Type="varchar(max)" />
+    <Property Name="StepResult" Type="varchar(max)" />
+    <Property Name="DelFlag" Type="smallint" />
+    <Property Name="SubTime" Type="datetime" />
+    <Property Name="ProcessTime" Type="datetime" />
+    <Property Name="Remark" Type="varchar(max)" />
+    <Property Name="ParentStepID" Type="int" />
+    <Property Name="ChildStepID" Type="int" />
+    <Property Name="IsEndStep" Type="bit" />
+    <Property Name="ProcessBy" Type="int" />
+  </EntityType>
+  <EntityType Name="WF_Temp">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="TempName" Type="varchar" MaxLength="32" />
+    <Property Name="SubTime" Type="datetime" />
+    <Property Name="ModfiedOn" Type="datetime" />
+    <Property Name="DelFlag" Type="smallint" />
+    <Property Name="Remark" Type="varchar(max)" />
+    <Property Name="TempDescript" Type="varchar(max)" />
+    <Property Name="TempForm" Type="varchar(max)" />
+    <Property Name="TempStatue" Type="int" />
+    <Property Name="SubBy" Type="varchar" MaxLength="32" />
+  </EntityType>
+  <Association Name="FK_DEPARTME_REFERENCE_ACTIONIN">
     <End Role="ActionInfo" Type="Self.ActionInfo" Multiplicity="1" />
     <End Role="Department_action" Type="Self.Department_action" Multiplicity="*" />
     <ReferentialConstraint>
@@ -163,41 +153,181 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_DEPARTME_REFERENCE_DEPARTME">
+    <End Role="Department" Type="Self.Department" Multiplicity="1" />
+    <End Role="Department_action" Type="Self.Department_action" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Department_action">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ROLE_ACT_REFERENCE_ACTIONIN">
+    <End Role="ActionInfo" Type="Self.ActionInfo" Multiplicity="1" />
+    <End Role="role_action" Type="Self.role_action" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ActionInfo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="role_action">
+        <PropertyRef Name="action_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ROLE_ACT_REFERENCE_ROLEINFO">
+    <End Role="RoleInfo" Type="Self.RoleInfo" Multiplicity="1" />
+    <End Role="role_action" Type="Self.role_action" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RoleInfo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="role_action">
+        <PropertyRef Name="role_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_USER_ACT_REFERENCE_ACTIONIN">
+    <End Role="ActionInfo" Type="Self.ActionInfo" Multiplicity="1" />
+    <End Role="user_action" Type="Self.user_action" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ActionInfo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="user_action">
+        <PropertyRef Name="Act_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_USER_ACT_REFERENCE_USERINFO">
+    <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="1" />
+    <End Role="user_action" Type="Self.user_action" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserInfo">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="user_action">
+        <PropertyRef Name="User_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_USER_ROL_REFERENCE_ROLEINFO">
+    <End Role="RoleInfo" Type="Self.RoleInfo" Multiplicity="1" />
+    <End Role="user_role" Type="Self.user_role" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RoleInfo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="user_role">
+        <PropertyRef Name="role_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_USER_ROL_REFERENCE_USERINFO">
+    <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="1" />
+    <End Role="user_role" Type="Self.user_role" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserInfo">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="user_role">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_USERINFO_REFERENCE_DEPARTME">
+    <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+    <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="UserInfo">
+        <PropertyRef Name="Dep_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WF_INSTA_REFERENCE_WF_TEMP">
+    <End Role="WF_Temp" Type="Self.WF_Temp" Multiplicity="0..1" />
+    <End Role="WF_Instance" Type="Self.WF_Instance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WF_Temp">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="WF_Instance">
+        <PropertyRef Name="Info_Instance" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WF_STEPI_REFERENCE_WF_INSTA">
+    <End Role="WF_Instance" Type="Self.WF_Instance" Multiplicity="0..1" />
+    <End Role="WF_StepInfo" Type="Self.WF_StepInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WF_Instance">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="WF_StepInfo">
+        <PropertyRef Name="WF_InstanceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="OAModelStoreContainer">
     <EntitySet Name="ActionInfo" EntityType="Self.ActionInfo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Department_action" EntityType="Self.Department_action" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="role_function" EntityType="Self.role_function" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="role_action" EntityType="Self.role_action" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RoleInfo" EntityType="Self.RoleInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="user_action" EntityType="Self.user_action" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="user_role" EntityType="Self.user_role" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserInfo" EntityType="Self.UserInfo" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="UserInfo_role" EntityType="Self.UserInfo_role" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK_Reference_2" Association="Self.FK_Reference_2">
+    <EntitySet Name="WF_Instance" EntityType="Self.WF_Instance" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="WF_StepInfo" EntityType="Self.WF_StepInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="WF_Temp" EntityType="Self.WF_Temp" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_DEPARTME_REFERENCE_ACTIONIN" Association="Self.FK_DEPARTME_REFERENCE_ACTIONIN">
       <End Role="ActionInfo" EntitySet="ActionInfo" />
-      <End Role="role_function" EntitySet="role_function" />
+      <End Role="Department_action" EntitySet="Department_action" />
     </AssociationSet>
-    <AssociationSet Name="FK_Reference_3" Association="Self.FK_Reference_3">
-      <End Role="RoleInfo" EntitySet="RoleInfo" />
-      <End Role="role_function" EntitySet="role_function" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Reference_4" Association="Self.FK_Reference_4">
-      <End Role="UserInfo" EntitySet="UserInfo" />
-      <End Role="UserInfo_role" EntitySet="UserInfo_role" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Reference_5" Association="Self.FK_Reference_5">
-      <End Role="RoleInfo" EntitySet="RoleInfo" />
-      <End Role="UserInfo_role" EntitySet="UserInfo_role" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Reference_6" Association="Self.FK_Reference_6">
-      <End Role="Department" EntitySet="Department" />
-      <End Role="UserInfo" EntitySet="UserInfo" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Reference_7" Association="Self.FK_Reference_7">
+    <AssociationSet Name="FK_DEPARTME_REFERENCE_DEPARTME" Association="Self.FK_DEPARTME_REFERENCE_DEPARTME">
       <End Role="Department" EntitySet="Department" />
       <End Role="Department_action" EntitySet="Department_action" />
     </AssociationSet>
-    <AssociationSet Name="FK_Reference_8" Association="Self.FK_Reference_8">
+    <AssociationSet Name="FK_ROLE_ACT_REFERENCE_ACTIONIN" Association="Self.FK_ROLE_ACT_REFERENCE_ACTIONIN">
       <End Role="ActionInfo" EntitySet="ActionInfo" />
-      <End Role="Department_action" EntitySet="Department_action" />
+      <End Role="role_action" EntitySet="role_action" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ROLE_ACT_REFERENCE_ROLEINFO" Association="Self.FK_ROLE_ACT_REFERENCE_ROLEINFO">
+      <End Role="RoleInfo" EntitySet="RoleInfo" />
+      <End Role="role_action" EntitySet="role_action" />
+    </AssociationSet>
+    <AssociationSet Name="FK_USER_ACT_REFERENCE_ACTIONIN" Association="Self.FK_USER_ACT_REFERENCE_ACTIONIN">
+      <End Role="ActionInfo" EntitySet="ActionInfo" />
+      <End Role="user_action" EntitySet="user_action" />
+    </AssociationSet>
+    <AssociationSet Name="FK_USER_ACT_REFERENCE_USERINFO" Association="Self.FK_USER_ACT_REFERENCE_USERINFO">
+      <End Role="UserInfo" EntitySet="UserInfo" />
+      <End Role="user_action" EntitySet="user_action" />
+    </AssociationSet>
+    <AssociationSet Name="FK_USER_ROL_REFERENCE_ROLEINFO" Association="Self.FK_USER_ROL_REFERENCE_ROLEINFO">
+      <End Role="RoleInfo" EntitySet="RoleInfo" />
+      <End Role="user_role" EntitySet="user_role" />
+    </AssociationSet>
+    <AssociationSet Name="FK_USER_ROL_REFERENCE_USERINFO" Association="Self.FK_USER_ROL_REFERENCE_USERINFO">
+      <End Role="UserInfo" EntitySet="UserInfo" />
+      <End Role="user_role" EntitySet="user_role" />
+    </AssociationSet>
+    <AssociationSet Name="FK_USERINFO_REFERENCE_DEPARTME" Association="Self.FK_USERINFO_REFERENCE_DEPARTME">
+      <End Role="Department" EntitySet="Department" />
+      <End Role="UserInfo" EntitySet="UserInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WF_INSTA_REFERENCE_WF_TEMP" Association="Self.FK_WF_INSTA_REFERENCE_WF_TEMP">
+      <End Role="WF_Temp" EntitySet="WF_Temp" />
+      <End Role="WF_Instance" EntitySet="WF_Instance" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WF_STEPI_REFERENCE_WF_INSTA" Association="Self.FK_WF_STEPI_REFERENCE_WF_INSTA">
+      <End Role="WF_Instance" EntitySet="WF_Instance" />
+      <End Role="WF_StepInfo" EntitySet="WF_StepInfo" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

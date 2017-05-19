@@ -4,16 +4,24 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="b0df084d9af1401da5cdc43d8106abda" Name="Diagram1">
-        <EntityTypeShape EntityType="OAModel.ActionInfo" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="OAModel.Department" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="OAModel.RoleInfo" Width="1.5" PointX="5.25" PointY="3.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="OAModel.UserInfo" Width="1.5" PointX="3" PointY="5.75" IsExpanded="true" />
-        <AssociationConnector Association="OAModel.FK_Reference_6" ManuallyRouted="false" />
+      <Diagram DiagramId="20947df24ea240cf88c479e71b7b66e2" Name="Diagram1" ZoomLevel="99">
+        <EntityTypeShape EntityType="OAModel.ActionInfo" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="OAModel.Department" Width="1.5" PointX="3" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="OAModel.RoleInfo" Width="1.5" PointX="3" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OAModel.user_action" Width="1.5" PointX="7.5" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="OAModel.UserInfo" Width="1.5" PointX="5.25" PointY="4.375" IsExpanded="true" />
+        <AssociationConnector Association="OAModel.FK_USER_ACT_REFERENCE_ACTIONIN" ManuallyRouted="false" />
+        <AssociationConnector Association="OAModel.FK_USERINFO_REFERENCE_DEPARTME" ManuallyRouted="false" />
+        <AssociationConnector Association="OAModel.FK_USER_ACT_REFERENCE_USERINFO" ManuallyRouted="false" />
         <AssociationConnector Association="OAModel.Department_action" ManuallyRouted="false" />
-        <AssociationConnector Association="OAModel.role_function" ManuallyRouted="false" />
-        <AssociationConnector Association="OAModel.UserInfo_role" ManuallyRouted="false" />
-      </Diagram>
+        <AssociationConnector Association="OAModel.role_action" ManuallyRouted="false" />
+        <AssociationConnector Association="OAModel.user_role" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="OAModel.WF_StepInfo" Width="1.5" PointX="9.875" PointY="9" />
+        <EntityTypeShape EntityType="OAModel.WF_Temp" Width="1.5" PointX="5.375" PointY="9.625" />
+        <EntityTypeShape EntityType="OAModel.WF_Instance" Width="1.5" PointX="7.625" PointY="9.375" />
+        <AssociationConnector Association="OAModel.FK_WF_INSTA_REFERENCE_WF_TEMP" />
+        <AssociationConnector Association="OAModel.FK_WF_STEPI_REFERENCE_WF_INSTA" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

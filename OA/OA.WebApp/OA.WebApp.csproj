@@ -78,6 +78,7 @@
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
+    <Reference Include="System.Activities" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web.DynamicData" />
@@ -201,6 +202,8 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\RoleInfoController.cs" />
     <Compile Include="Controllers\UserInfoController.cs" />
+    <Compile Include="Controllers\WfInstanceController.cs" />
+    <Compile Include="Controllers\WfTempController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -217,6 +220,8 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Images\300001054794129041600357461_950.jpg" />
     <Content Include="Content\Images\43210c41deb2622c08f07b6ee8252e35.jpg" />
+    <Content Include="Content\tableStyle.css" />
+    <Content Include="Error.html" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -244,6 +249,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\kindeditor-all-min.js" />
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
@@ -291,9 +297,15 @@
     <Content Include="Views\UserInfo\SetUserRoleInfo.cshtml" />
     <Content Include="Views\ActionInfo\Index.cshtml" />
     <Content Include="Views\ActionInfo\SetActionRole.cshtml" />
+    <Content Include="Views\UserInfo\SetUserActionInfo.cshtml" />
+    <Content Include="Views\WfTemp\Index.cshtml" />
+    <Content Include="Views\WfTemp\createTemp.cshtml" />
+    <Content Include="Views\WfInstance\Index.cshtml" />
+    <Content Include="Views\WfInstance\StartWorkflow.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\kinder\" />
     <Folder Include="Content\lib\" />
     <Folder Include="Content\themes\" />
     <Folder Include="MenuIcon\" />
@@ -331,6 +343,10 @@
     <ProjectReference Include="..\OA.Model\OA.Model.csproj">
       <Project>{81ad28e2-b363-479f-bf0e-a5a333298fc1}</Project>
       <Name>OA.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Workflow\Workflow.csproj">
+      <Project>{1ce9c067-ef16-40b7-9f5b-9fab2f6421e7}</Project>
+      <Name>Workflow</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

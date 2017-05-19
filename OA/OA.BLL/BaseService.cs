@@ -21,10 +21,10 @@ namespace OA.BLL
 
         //这个父类的属性用于获得子类的实例对象
         public IDAL.IBaseDal<T> CurrentDal { get; set; }
-        public abstract void SetCurrentDal();
+        public abstract void SetCurretnDal();
         public BaseService()
         {
-            SetCurrentDal();
+            SetCurretnDal();
         }
 
         public IQueryable<T> LoadEntities(System.Linq.Expressions.Expression<Func<T, bool>> whereLambda)

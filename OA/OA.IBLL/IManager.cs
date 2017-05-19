@@ -25,7 +25,27 @@ namespace OA.IBLL
        
     }   
 	
+	public partial interface Iuser_actionService : IBaseService<user_action>
+    {
+       
+    }   
+	
 	public partial interface IUserInfoService : IBaseService<UserInfo>
+    {
+       
+    }   
+	
+	public partial interface IWF_InstanceService : IBaseService<WF_Instance>
+    {
+       
+    }   
+	
+	public partial interface IWF_StepInfoService : IBaseService<WF_StepInfo>
+    {
+       
+    }   
+	
+	public partial interface IWF_TempService : IBaseService<WF_Temp>
     {
        
     }   

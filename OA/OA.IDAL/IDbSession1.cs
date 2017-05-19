@@ -18,6 +18,14 @@ namespace OA.IDAL
 	
 		IRoleInfoDal RoleInfoDal{get;set;}
 	
+		Iuser_actionDal user_actionDal{get;set;}
+	
 		IUserInfoDal UserInfoDal{get;set;}
+	
+		IWF_InstanceDal WF_InstanceDal{get;set;}
+	
+		IWF_StepInfoDal WF_StepInfoDal{get;set;}
+	
+		IWF_TempDal WF_TempDal{get;set;}
 	}	
 }

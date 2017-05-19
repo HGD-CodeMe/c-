@@ -17,8 +17,9 @@
     <Property Name="Sort" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
     <Property Name="ActionTypeEnum" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
     <Property Name="MenuIcon" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="user_action" Relationship="Self.FK_USER_ACT_REFERENCE_ACTIONIN" FromRole="ActionInfo" ToRole="user_action" />
     <NavigationProperty Name="Department" Relationship="Self.Department_action" FromRole="ActionInfo" ToRole="Department" />
-    <NavigationProperty Name="RoleInfo" Relationship="Self.role_function" FromRole="ActionInfo" ToRole="RoleInfo" />
+    <NavigationProperty Name="RoleInfo" Relationship="Self.role_action" FromRole="ActionInfo" ToRole="RoleInfo" />
   </EntityType>
   <EntityType Name="Department">
     <Key>
@@ -30,7 +31,7 @@
     <Property Name="TreePath" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
     <Property Name="Level" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
     <Property Name="IsLeaf" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="UserInfo" Relationship="Self.FK_Reference_6" FromRole="Department" ToRole="UserInfo" />
+    <NavigationProperty Name="UserInfo" Relationship="Self.FK_USERINFO_REFERENCE_DEPARTME" FromRole="Department" ToRole="UserInfo" />
     <NavigationProperty Name="ActionInfo" Relationship="Self.Department_action" FromRole="Department" ToRole="ActionInfo" />
   </EntityType>
   <EntityType Name="RoleInfo">
@@ -44,8 +45,19 @@
     <Property Name="Remark" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
     <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
     <Property Name="Sort" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="ActionInfo" Relationship="Self.role_function" FromRole="RoleInfo" ToRole="ActionInfo" />
-    <NavigationProperty Name="UserInfo" Relationship="Self.UserInfo_role" FromRole="RoleInfo" ToRole="UserInfo" />
+    <NavigationProperty Name="ActionInfo" Relationship="Self.role_action" FromRole="RoleInfo" ToRole="ActionInfo" />
+    <NavigationProperty Name="UserInfo" Relationship="Self.user_role" FromRole="RoleInfo" ToRole="UserInfo" />
+  </EntityType>
+  <EntityType Name="user_action">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="User_ID" Type="Int32" Nullable="false" />
+    <Property Name="Act_ID" Type="Int32" Nullable="false" />
+    <Property Name="isPass" Type="Boolean" />
+    <NavigationProperty Name="ActionInfo" Relationship="Self.FK_USER_ACT_REFERENCE_ACTIONIN" FromRole="user_action" ToRole="ActionInfo" />
+    <NavigationProperty Name="UserInfo" Relationship="Self.FK_USER_ACT_REFERENCE_USERINFO" FromRole="user_action" ToRole="UserInfo" />
   </EntityType>
   <EntityType Name="UserInfo">
     <Key>
@@ -60,10 +72,23 @@
     <Property Name="ModeifiedOn" Type="DateTime" Precision="3" />
     <Property Name="Remark" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
     <Property Name="Sort" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="Department" Relationship="Self.FK_Reference_6" FromRole="UserInfo" ToRole="Department" />
-    <NavigationProperty Name="RoleInfo" Relationship="Self.UserInfo_role" FromRole="UserInfo" ToRole="RoleInfo" />
+    <NavigationProperty Name="Department" Relationship="Self.FK_USERINFO_REFERENCE_DEPARTME" FromRole="UserInfo" ToRole="Department" />
+    <NavigationProperty Name="user_action" Relationship="Self.FK_USER_ACT_REFERENCE_USERINFO" FromRole="UserInfo" ToRole="user_action" />
+    <NavigationProperty Name="RoleInfo" Relationship="Self.user_role" FromRole="UserInfo" ToRole="RoleInfo" />
   </EntityType>
-  <Association Name="FK_Reference_6">
+  <Association Name="FK_USER_ACT_REFERENCE_ACTIONIN">
+    <End Role="ActionInfo" Type="Self.ActionInfo" Multiplicity="1" />
+    <End Role="user_action" Type="Self.user_action" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ActionInfo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="user_action">
+        <PropertyRef Name="Act_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_USERINFO_REFERENCE_DEPARTME">
     <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
     <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="*" />
     <ReferentialConstraint>
@@ -75,38 +100,151 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_USER_ACT_REFERENCE_USERINFO">
+    <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="1" />
+    <End Role="user_action" Type="Self.user_action" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserInfo">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="user_action">
+        <PropertyRef Name="User_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="Department_action">
+    <End Role="ActionInfo" Type="Self.ActionInfo" Multiplicity="*" />
     <End Role="Department" Type="Self.Department" Multiplicity="*" />
-    <End Role="ActionInfo" Type="Self.ActionInfo" Multiplicity="*" />
   </Association>
-  <Association Name="role_function">
+  <Association Name="role_action">
     <End Role="ActionInfo" Type="Self.ActionInfo" Multiplicity="*" />
     <End Role="RoleInfo" Type="Self.RoleInfo" Multiplicity="*" />
   </Association>
-  <Association Name="UserInfo_role">
+  <Association Name="user_role">
+    <End Role="RoleInfo" Type="Self.RoleInfo" Multiplicity="*" />
     <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="*" />
-    <End Role="RoleInfo" Type="Self.RoleInfo" Multiplicity="*" />
   </Association>
   <EntityContainer Name="OAEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="ActionInfo" EntityType="Self.ActionInfo" />
     <EntitySet Name="Department" EntityType="Self.Department" />
     <EntitySet Name="RoleInfo" EntityType="Self.RoleInfo" />
+    <EntitySet Name="user_action" EntityType="Self.user_action" />
     <EntitySet Name="UserInfo" EntityType="Self.UserInfo" />
-    <AssociationSet Name="FK_Reference_6" Association="Self.FK_Reference_6">
+    <AssociationSet Name="FK_USER_ACT_REFERENCE_ACTIONIN" Association="Self.FK_USER_ACT_REFERENCE_ACTIONIN">
+      <End Role="ActionInfo" EntitySet="ActionInfo" />
+      <End Role="user_action" EntitySet="user_action" />
+    </AssociationSet>
+    <AssociationSet Name="FK_USERINFO_REFERENCE_DEPARTME" Association="Self.FK_USERINFO_REFERENCE_DEPARTME">
       <End Role="Department" EntitySet="Department" />
       <End Role="UserInfo" EntitySet="UserInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_USER_ACT_REFERENCE_USERINFO" Association="Self.FK_USER_ACT_REFERENCE_USERINFO">
+      <End Role="UserInfo" EntitySet="UserInfo" />
+      <End Role="user_action" EntitySet="user_action" />
     </AssociationSet>
     <AssociationSet Name="Department_action" Association="Self.Department_action">
+      <End Role="ActionInfo" EntitySet="ActionInfo" />
       <End Role="Department" EntitySet="Department" />
-      <End Role="ActionInfo" EntitySet="ActionInfo" />
     </AssociationSet>
-    <AssociationSet Name="role_function" Association="Self.role_function">
+    <AssociationSet Name="role_action" Association="Self.role_action">
       <End Role="ActionInfo" EntitySet="ActionInfo" />
       <End Role="RoleInfo" EntitySet="RoleInfo" />
     </AssociationSet>
-    <AssociationSet Name="UserInfo_role" Association="Self.UserInfo_role">
+    <AssociationSet Name="user_role" Association="Self.user_role">
+      <End Role="RoleInfo" EntitySet="RoleInfo" />
       <End Role="UserInfo" EntitySet="UserInfo" />
-      <End Role="RoleInfo" EntitySet="RoleInfo" />
+    </AssociationSet>
+    <EntitySet Name="WF_StepInfo" EntityType="OAModel.WF_StepInfo" />
+    <EntitySet Name="WF_Temp" EntityType="OAModel.WF_Temp" />
+    <EntitySet Name="WF_Instance" EntityType="OAModel.WF_Instance" />
+    <AssociationSet Name="FK_WF_INSTA_REFERENCE_WF_TEMP" Association="OAModel.FK_WF_INSTA_REFERENCE_WF_TEMP">
+      <End Role="WF_Temp" EntitySet="WF_Temp" />
+      <End Role="WF_Instance" EntitySet="WF_Instance" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WF_STEPI_REFERENCE_WF_INSTA" Association="OAModel.FK_WF_STEPI_REFERENCE_WF_INSTA">
+      <End Role="WF_Instance" EntitySet="WF_Instance" />
+      <End Role="WF_StepInfo" EntitySet="WF_StepInfo" />
     </AssociationSet>
   </EntityContainer>
+  <EntityType Name="WF_StepInfo">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="WF_InstanceID" Type="Int32" />
+    <Property Name="StepName" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <Property Name="IsProcessed" Type="Boolean" />
+    <Property Name="IsStartStep" Type="Boolean" />
+    <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="StepResult" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="DelFlag" Type="Int16" />
+    <Property Name="SubTime" Type="DateTime" Precision="3" />
+    <Property Name="ProcessTime" Type="DateTime" Precision="3" />
+    <Property Name="Remark" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="ParentStepID" Type="Int32" />
+    <Property Name="ChildStepID" Type="Int32" />
+    <Property Name="IsEndStep" Type="Boolean" />
+    <Property Name="ProcessBy" Type="Int32" />
+    <NavigationProperty Name="WF_Instance" Relationship="OAModel.FK_WF_STEPI_REFERENCE_WF_INSTA" FromRole="WF_StepInfo" ToRole="WF_Instance" />
+  </EntityType>
+  <EntityType Name="WF_Temp">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="TempName" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <Property Name="SubTime" Type="DateTime" Precision="3" />
+    <Property Name="ModfiedOn" Type="DateTime" Precision="3" />
+    <Property Name="DelFlag" Type="Int16" />
+    <Property Name="Remark" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="TempDescript" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="TempForm" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="TempStatue" Type="Int32" />
+    <Property Name="SubBy" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="WF_Instance" Relationship="OAModel.FK_WF_INSTA_REFERENCE_WF_TEMP" FromRole="WF_Temp" ToRole="WF_Instance" />
+  </EntityType>
+  <EntityType Name="WF_Instance">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Info_Instance" Type="Int32" />
+    <Property Name="InstanceName" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <Property Name="SubTime" Type="DateTime" Precision="3" />
+    <Property Name="StartedBy" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <Property Name="Level" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <Property Name="SubForm" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <Property Name="Result" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <Property Name="WF_TempID" Type="Int32" />
+    <Property Name="ApplicationId" Type="Int32" />
+    <Property Name="Temp_Instance" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="WF_Temp" Relationship="OAModel.FK_WF_INSTA_REFERENCE_WF_TEMP" FromRole="WF_Instance" ToRole="WF_Temp" />
+    <NavigationProperty Name="WF_StepInfo" Relationship="OAModel.FK_WF_STEPI_REFERENCE_WF_INSTA" FromRole="WF_Instance" ToRole="WF_StepInfo" />
+  </EntityType>
+  <Association Name="FK_WF_INSTA_REFERENCE_WF_TEMP">
+    <End Type="OAModel.WF_Temp" Role="WF_Temp" Multiplicity="0..1" />
+    <End Type="OAModel.WF_Instance" Role="WF_Instance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WF_Temp">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="WF_Instance">
+        <PropertyRef Name="Info_Instance" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WF_STEPI_REFERENCE_WF_INSTA">
+    <End Type="OAModel.WF_Instance" Role="WF_Instance" Multiplicity="0..1" />
+    <End Type="OAModel.WF_StepInfo" Role="WF_StepInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WF_Instance">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="WF_StepInfo">
+        <PropertyRef Name="WF_InstanceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

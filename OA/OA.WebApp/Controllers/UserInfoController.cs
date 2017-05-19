@@ -16,13 +16,15 @@ namespace OA.WebApp.Controllers
         // GET: UserInfo
         IBLL.IUserInfoService UserInfoService = new BLL.UserInfoService();
         IBLL.IRoleInfoService RoleInfoService = new RoleInfoService();
+        IBLL.IActionInfoService ActionInfoService = new ActionInfoService();
+        IBLL.Iuser_actionService user_actionService = new user_actionService();
         public ActionResult Index()
         {
             return View();
         }
 
         #region 获取用户数据
-        public ActionResult GetActionInfoList()
+        public ActionResult GetUserInfo()
         {
             int pageIndex = Request["page"] != null ? int.Parse(Request["page"]) : 1;
             int pageSize = Request["rows"] != null ? int.Parse(Request["rows"]) : 5;
@@ -162,6 +164,71 @@ namespace OA.WebApp.Controllers
         }
         #endregion
 
+        #region 对用户分配特殊权限
+        public ActionResult SetUserActionInfo()
+        {
+            int userId = int.Parse(Request["userId"]);
+            //查询要分配权限的用户信息
+            var userInfo = UserInfoService.LoadEntities(u => u.id == userId).FirstOrDefault();
+            ViewBag.userInfo = userInfo;
+            //获取所有的权限信息
+            short delFlag = (short)DelFlagEnum.Normarl;
+            var AllActionList = ActionInfoService.LoadEntities(a => a.DelFlag == delFlag).ToList();
+            //找出用户已经有的权限,这里是从两张表之间的关系表中去找
+            var AllActionIdList = userInfo.user_action.ToList();
 
+            ViewBag.ActionList = AllActionList;
+            ViewBag.ActionIdList = AllActionIdList;
+
+            return View();
+
+
+        }
+        #endregion
+
+        #region 完成特殊权限分配
+        public ActionResult SetActionUser()
+        {
+            int userId = int.Parse(Request["userId"]);
+            int actionId = int.Parse(Request["actionId"]);
+
+            bool isPass = Request["value"] == "true" ? true : false;
+
+            if(UserInfoService.SetUserActionInfo(userId, actionId, isPass))
+            {
+                return Content("ok");
+            }
+            else
+            {
+               return Content("no");
+            }
+        }
+        #endregion
+
+        #region 清除用户权限
+        public ActionResult ClearUserAction()
+        {
+            int userId = int.Parse(Request["userId"]);
+            int actionId = int.Parse(Request["actionId"]);
+            var UserInfo_ActionInfo = user_actionService.LoadEntities
+                (r => r.User_ID == userId && r.Act_ID == actionId).FirstOrDefault();
+
+            if (UserInfo_ActionInfo != null)
+            {
+                if (user_actionService.DeleteEntity(UserInfo_ActionInfo))
+                {
+                    return Content("ok");
+                }
+                else
+                {
+                    return Content("no");
+                }
+            }
+            else
+            {
+                return Content("no");
+            }
+        }
+        #endregion
     }
 }

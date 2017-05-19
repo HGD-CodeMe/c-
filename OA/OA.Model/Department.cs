@@ -7,15 +7,19 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+
 namespace OA.Model
 {
     using System;
     using System.Collections.Generic;
     
+    
+    
     public partial class Department
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Department()
+        
+    	public Department()
         {
             this.UserInfo = new HashSet<UserInfo>();
             this.ActionInfo = new HashSet<ActionInfo>();
@@ -28,8 +32,10 @@ namespace OA.Model
         public string Level { get; set; }
         public string IsLeaf { get; set; }
     
+    	
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserInfo> UserInfo { get; set; }
+    	
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ActionInfo> ActionInfo { get; set; }
     }

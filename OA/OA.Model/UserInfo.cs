@@ -7,16 +7,21 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+
 namespace OA.Model
 {
     using System;
     using System.Collections.Generic;
     
+    
+    
     public partial class UserInfo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public UserInfo()
+        
+    	public UserInfo()
         {
+            this.user_action = new HashSet<user_action>();
             this.RoleInfo = new HashSet<RoleInfo>();
         }
     
@@ -31,6 +36,10 @@ namespace OA.Model
         public string Sort { get; set; }
     
         public virtual Department Department { get; set; }
+    	
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<user_action> user_action { get; set; }
+    	
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RoleInfo> RoleInfo { get; set; }
     }

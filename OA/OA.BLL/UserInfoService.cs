@@ -63,6 +63,7 @@ namespace OA.BLL
 
         }
 
+
         public bool SetOrderInfo(int userId, List<int> roleIdList)
         {
             var userInfo = this.GetCurrentDbSession.UserInfoDal.LoadEntities
@@ -85,6 +86,34 @@ namespace OA.BLL
             {
                 return false;
             }
+        }
+
+        /// <summary>
+        /// 完成用户权限的分配
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="actionId"></param>
+        /// <param name="isPass"></param>
+        /// <returns></returns>
+        public bool SetUserActionInfo(int userId, int actionId, bool isPass)
+        {
+            var userInfo_actionInfo = this.GetCurrentDbSession.user_actionDal.LoadEntities(r => r.User_ID == userId &&
+            r.Act_ID == actionId).FirstOrDefault();
+
+            if(userInfo_actionInfo == null)
+            {
+                user_action user_action1 = new user_action();
+                user_action1.Act_ID = actionId;
+                user_action1.User_ID = userId;
+                user_action1.isPass = isPass;
+                this.GetCurrentDbSession.user_actionDal.AddEntity(user_action1);
+            }
+            else
+            {
+                userInfo_actionInfo.isPass = isPass;
+                this.GetCurrentDbSession.user_actionDal.EditEntity(userInfo_actionInfo);
+            }
+            return this.GetCurrentDbSession.SaveChanges();
         }
     }
 }

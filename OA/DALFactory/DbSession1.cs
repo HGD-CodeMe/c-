@@ -60,6 +60,21 @@ namespace OA.DALFactory
             set { _RoleInfoDal = value; }
         }
 	
+		private Iuser_actionDal _user_actionDal;
+        public Iuser_actionDal user_actionDal
+        {
+            get
+            {
+                if(_user_actionDal == null)
+                {
+                   // _user_actionDal = new user_actionDal();
+				    _user_actionDal =AbstractFactory.Createuser_actionDal();
+                }
+                return _user_actionDal;
+            }
+            set { _user_actionDal = value; }
+        }
+	
 		private IUserInfoDal _UserInfoDal;
         public IUserInfoDal UserInfoDal
         {
@@ -73,6 +88,51 @@ namespace OA.DALFactory
                 return _UserInfoDal;
             }
             set { _UserInfoDal = value; }
+        }
+	
+		private IWF_InstanceDal _WF_InstanceDal;
+        public IWF_InstanceDal WF_InstanceDal
+        {
+            get
+            {
+                if(_WF_InstanceDal == null)
+                {
+                   // _WF_InstanceDal = new WF_InstanceDal();
+				    _WF_InstanceDal =AbstractFactory.CreateWF_InstanceDal();
+                }
+                return _WF_InstanceDal;
+            }
+            set { _WF_InstanceDal = value; }
+        }
+	
+		private IWF_StepInfoDal _WF_StepInfoDal;
+        public IWF_StepInfoDal WF_StepInfoDal
+        {
+            get
+            {
+                if(_WF_StepInfoDal == null)
+                {
+                   // _WF_StepInfoDal = new WF_StepInfoDal();
+				    _WF_StepInfoDal =AbstractFactory.CreateWF_StepInfoDal();
+                }
+                return _WF_StepInfoDal;
+            }
+            set { _WF_StepInfoDal = value; }
+        }
+	
+		private IWF_TempDal _WF_TempDal;
+        public IWF_TempDal WF_TempDal
+        {
+            get
+            {
+                if(_WF_TempDal == null)
+                {
+                   // _WF_TempDal = new WF_TempDal();
+				    _WF_TempDal =AbstractFactory.CreateWF_TempDal();
+                }
+                return _WF_TempDal;
+            }
+            set { _WF_TempDal = value; }
         }
 	}	
 }

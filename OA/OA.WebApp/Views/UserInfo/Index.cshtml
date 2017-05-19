@@ -21,6 +21,7 @@
           $("#addDiv").css("display", "none");
           $("#editDiv").css("display", "none");
           $("#setRoleDiv").css("display", "none");
+          $("#setActionDiv").css("display", "none");
           //搜索
           $("#btnSearch").click(function () {
               var pars = {
@@ -90,8 +91,51 @@
 
                         setUserRoleInfo();
                     }
+                }, {
+                    id: 'btnSetUserRole',
+                    text: '为用户分配特殊权限',
+                    iconCls: 'icon-edit',
+                    handler: function () {
+
+                        setUserUserActionInfo();
+                    }
                 }],
             });
+        }
+        //为特殊用户分配权限
+        function setUserUserActionInfo()
+        {
+            var rows = $('#tt').datagrid('getSelections');
+            if (rows.length != 1) {
+                //alert("请选择要修改的商品！");
+                $.messager.alert("提醒", "请选择要设置角色的1条用户记录!", "error");
+                return;
+            }
+            $("#setActionFrame").attr("src", "/UserInfo/SetUserActionInfo/?userId=" + rows[0].ID);
+            $("#setActionDiv").css("display", "block");
+
+            $('#setActionDiv').dialog({
+                title: "为用户设置特殊权限角色信息",
+                width: 600,
+                height: 400,
+                collapsible: true,
+                resizable: true,
+                modal: true,
+                buttons: [{
+                    text: '确定',
+                    iconCls: 'icon-ok',
+                    handler: function () {
+                        // $("#addForm").submit();//提交表单
+                    }
+                }, {
+                    text: '取消',
+                    handler: function () {
+                        $('#setRoleDiv').dialog('close');
+                    }
+                }]
+            });
+
+
         }
         //为用户分配角色
         function setUserRoleInfo() {
@@ -125,8 +169,6 @@
             });
 
         }
-
-
 
         //编辑用户信息
         function eidtInfo() {
@@ -183,7 +225,6 @@
                 $.messager.alert("提醒", "修改数据错误!!", "error");
             }
         }
-
 
         //添加信息
         function addInfo() {
@@ -277,6 +318,7 @@
         }
     </div>
     <!---------------添加用户信息结束--------------------->
+
     <!---------------修改用户信息--------------------->
     <div id="editDiv">
         @using (Ajax.BeginForm("EditUserInfo", "UserInfo", new { }, new AjaxOptions() { HttpMethod = "post", OnSuccess = "afterEdit" }, new { id = "editForm" }))
@@ -293,13 +335,18 @@
             </table>
         }
     </div>
-
     <!---------------修改用户信息结束--------------------->
+
     <!-------------------设置用户的角色------------------>
     <div id="setRoleDiv">
         <iframe id="setRoleFrame" scrolling="no" width="100%" height="100%" frameborder="0"></iframe>
     </div>
-
     <!-------------------设置用户的角色结束------------------>
+
+    <!--设置用户的权限-->
+    <div id="setActionDiv" style="overflow:hidden">
+        <iframe width="100%" height="100%" id="setActionFrame" frameborder="0"></iframe>
+    </div>
+    <!--设置用户的权限结束-->
 </body>
 </html>

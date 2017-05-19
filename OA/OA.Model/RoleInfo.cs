@@ -7,15 +7,19 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+
 namespace OA.Model
 {
     using System;
     using System.Collections.Generic;
     
+    
+    
     public partial class RoleInfo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public RoleInfo()
+        
+    	public RoleInfo()
         {
             this.ActionInfo = new HashSet<ActionInfo>();
             this.UserInfo = new HashSet<UserInfo>();
@@ -29,8 +33,10 @@ namespace OA.Model
         public Nullable<System.DateTime> ModifiedOn { get; set; }
         public string Sort { get; set; }
     
+    	
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ActionInfo> ActionInfo { get; set; }
+    	
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserInfo> UserInfo { get; set; }
     }

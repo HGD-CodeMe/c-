@@ -1,0 +1,4 @@
+obj\Debug\_Workflow.g.cs
+obj\Debug\FincalActivity.g.cs
+obj\Debug\Workflow_FincalActivity_BeforeInitializeComponentHelper.cs
+E:\C#\OA\Workflow\obj\Debug\Workflow_FincalActivity_CompiledExpressionRoot.cs

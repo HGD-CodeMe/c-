@@ -7,16 +7,21 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+
 namespace OA.Model
 {
     using System;
     using System.Collections.Generic;
     
+    
+    
     public partial class ActionInfo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ActionInfo()
+        
+    	public ActionInfo()
         {
+            this.user_action = new HashSet<user_action>();
             this.Department = new HashSet<Department>();
             this.RoleInfo = new HashSet<RoleInfo>();
         }
@@ -35,8 +40,13 @@ namespace OA.Model
         public string ActionTypeEnum { get; set; }
         public string MenuIcon { get; set; }
     
+    	
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<user_action> user_action { get; set; }
+    	
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Department> Department { get; set; }
+    	
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RoleInfo> RoleInfo { get; set; }
     }
