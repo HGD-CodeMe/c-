@@ -1,4 +1,5 @@
-﻿using OA.Model;
+﻿
+using OA.Model;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -13,6 +14,7 @@ namespace OA.DAL
         //这个上下文不懂
         //OAEntities Db = new OAEntities();
         DbContext Db = DbContextFactory.CreateDbContext();
+     
         /// <summary>
         /// 添加
         /// </summary>
@@ -21,9 +23,8 @@ namespace OA.DAL
         public T AddEntity(T entity)
         {
             Db.Set<T>().Add(entity);
-            // Db.SaveChanges();
-            this.Db.SaveChanges();
             return entity;
+           
         }
 
         /// <summary>
@@ -34,10 +35,11 @@ namespace OA.DAL
         public bool DeleteEntity(T entity)
         {
             Db.Entry<T>(entity).State = System.Data.Entity.EntityState.Deleted;
-            //return Db.SaveChanges() > 0;
-            this.Db.SaveChanges();
-            return true;
+           // return Db.SaveChanges() > 0;
+           //Db.SaveChanges();
+           return true;
         }
+     
 
         /// <summary>
         /// 修改
@@ -48,7 +50,6 @@ namespace OA.DAL
         {
             Db.Entry<T>(entity).State = System.Data.Entity.EntityState.Modified;
             //return Db.SaveChanges() > 0;
-            this.Db.SaveChanges();
             return true;//在EF上下文中打下标记
         }
 

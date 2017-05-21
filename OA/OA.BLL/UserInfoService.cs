@@ -30,7 +30,9 @@ namespace OA.BLL
             foreach(var userInfo in userInfoList)
             {
                 this.GetCurrentDbSession.UserInfoDal.DeleteEntity(userInfo);
+               
             }
+
             return this.GetCurrentDbSession.SaveChanges();
         }
 

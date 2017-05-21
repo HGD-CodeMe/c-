@@ -25,13 +25,13 @@ namespace OA.Model
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<ActionInfo> ActionInfo { get; set; }
         public virtual DbSet<Department> Department { get; set; }
-        public virtual DbSet<RoleInfo> RoleInfo { get; set; }
-        public virtual DbSet<user_action> user_action { get; set; }
-        public virtual DbSet<UserInfo> UserInfo { get; set; }
         public virtual DbSet<WF_StepInfo> WF_StepInfo { get; set; }
         public virtual DbSet<WF_Temp> WF_Temp { get; set; }
         public virtual DbSet<WF_Instance> WF_Instance { get; set; }
+        public virtual DbSet<UserInfo> UserInfo { get; set; }
+        public virtual DbSet<RoleInfo> RoleInfo { get; set; }
+        public virtual DbSet<user_action> user_action { get; set; }
+        public virtual DbSet<ActionInfo> ActionInfo { get; set; }
     }
 }

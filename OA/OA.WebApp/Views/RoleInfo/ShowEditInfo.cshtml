@@ -1,0 +1,65 @@
+﻿@model OA.Model.RoleInfo
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>编辑角色信息</title>
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script type="text/javascript">
+        function subForm() {
+            $("#editForm").submit();
+        }
+        function afterEdit(data) {
+            if (data == "ok") {
+                window.parent.afterEdit(data);
+            }
+        }
+    </script>
+</head>
+<body style="overflow: hidden; ">
+    @using (Ajax.BeginForm("EditRoleInfo", "RoleInfo", new { }, new AjaxOptions() { HttpMethod = "post", OnSuccess = "afterEdit" }, new {id="editForm"}))
+    {
+        @Html.ValidationSummary(true)
+    
+        <fieldset>
+            <legend>编辑角色信息</legend>
+    
+            @Html.HiddenFor(model => model.ID)
+    
+            <div class="editor-label">
+                @Html.LabelFor(model => model.RoleName, "角色名称")
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.RoleName)
+                @Html.ValidationMessageFor(model => model.RoleName)
+            </div>
+    
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Remark, "备注")
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Remark)
+                @Html.ValidationMessageFor(model => model.Remark)
+            </div>
+    
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Sort, "排序规则")
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Sort)
+                @Html.ValidationMessageFor(model => model.Sort)
+            </div>
+          
+        </fieldset>
+    }
+    
+  
+</body>
+</html>

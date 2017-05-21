@@ -14,7 +14,7 @@ namespace OA.Model
     using System.Collections.Generic;
     
     
-    
+     using Newtonsoft.Json;
     public partial class WF_StepInfo
     {
         public int ID { get; set; }

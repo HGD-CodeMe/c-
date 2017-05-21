@@ -14,7 +14,7 @@ namespace OA.Model
     using System.Collections.Generic;
     
     
-    
+     using Newtonsoft.Json;
     public partial class WF_Instance
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -38,7 +38,7 @@ namespace OA.Model
         public int Temp_Instance { get; set; }
     
         public virtual WF_Temp WF_Temp { get; set; }
-    	
+    	  [JsonIgnore]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<WF_StepInfo> WF_StepInfo { get; set; }
     }

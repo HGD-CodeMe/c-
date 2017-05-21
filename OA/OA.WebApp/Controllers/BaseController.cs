@@ -26,17 +26,29 @@ namespace OA.WebApp.Controllers
             {
                 return;
             }
+
+            //这里我简单实现 登录过滤 ，下面将权限分太细了
+            if(Session["userInfo"] != null)
+            {
+                loginUser = (UserInfo)Session["userInfo"];
+            }
+            else
+            {
+                Response.Redirect("/Error.html");
+                return;
+            }
+
             ////完成权限过滤
             //string actionUrl = Request.Url.AbsolutePath.ToLower();//获得绝对路径
             //string actionHttpMethod = Request.HttpMethod;//请求方式
             //IBLL.IActionInfoService ActionInfoService = new BLL.ActionInfoService();
             //IBLL.IUserInfoService UserInfoService = new BLL.UserInfoService();
 
-           
-            //var actionInfo =  ActionInfoService.LoadEntities
+
+            //var actionInfo = ActionInfoService.LoadEntities
             //    (a => a.Url == actionUrl && a.HttpMethod == actionHttpMethod).FirstOrDefault();
 
-            //if(actionInfo == null)
+            //if (actionInfo == null)
             //{
             //    Response.Redirect("/Error.html");
             //    return;
@@ -50,12 +62,12 @@ namespace OA.WebApp.Controllers
             //{
             //    filterContext.HttpContext.Response.Redirect("/Login/Index");
             //    var r_userInfo_ActionInfo = (from a in loginuUserInfo.user_action
-            //                                where a.Act_ID == actionInfo.ID
-            //                                select a).FirstOrDefault();
-                
-            //    if(r_userInfo_ActionInfo != null)
+            //                                 where a.Act_ID == actionInfo.ID
+            //                                 select a).FirstOrDefault();
+
+            //    if (r_userInfo_ActionInfo != null)
             //    {
-            //        if(r_userInfo_ActionInfo.isPass == true)
+            //        if (r_userInfo_ActionInfo.isPass == true)
             //        {
             //            return;
             //        }
@@ -68,17 +80,17 @@ namespace OA.WebApp.Controllers
             //    //按照用户--角色--权限进行过滤 
             //    var loginUserRoleInfo = loginUser.RoleInfo;
             //    var loginUserCountAction = (from r in loginUserRoleInfo
-            //                             from a in r.ActionInfo
-            //                             where a.ID == actionInfo.ID
-            //                             select a).Count();
+            //                                from a in r.ActionInfo
+            //                                where a.ID == actionInfo.ID
+            //                                select a).Count();
 
-            //    if(loginUserCountAction < 1)
+            //    if (loginUserCountAction < 1)
             //    {
             //        Response.Redirect("/Error.html");
             //        return;
             //    }
-               
-            //}
+
+            //  }
         }
     }
 }

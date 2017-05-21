@@ -14,7 +14,7 @@ namespace OA.Model
     using System.Collections.Generic;
     
     
-    
+     using Newtonsoft.Json;
     public partial class user_action
     {
         public int ID { get; set; }
@@ -22,7 +22,7 @@ namespace OA.Model
         public int Act_ID { get; set; }
         public Nullable<bool> isPass { get; set; }
     
-        public virtual ActionInfo ActionInfo { get; set; }
         public virtual UserInfo UserInfo { get; set; }
+        public virtual ActionInfo ActionInfo { get; set; }
     }
 }

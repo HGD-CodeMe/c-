@@ -14,7 +14,7 @@ namespace OA.Model
     using System.Collections.Generic;
     
     
-    
+     using Newtonsoft.Json;
     public partial class Department
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -32,10 +32,10 @@ namespace OA.Model
         public string Level { get; set; }
         public string IsLeaf { get; set; }
     
-    	
+    	  [JsonIgnore]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserInfo> UserInfo { get; set; }
-    	
+    	  [JsonIgnore]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ActionInfo> ActionInfo { get; set; }
     }

@@ -2,9 +2,11 @@ E:\C#\OA\OA.IBLL\bin\Debug\OA.IBLL.dll
 E:\C#\OA\OA.IBLL\bin\Debug\OA.IBLL.pdb
 E:\C#\OA\OA.IBLL\bin\Debug\OA.IDAL.dll
 E:\C#\OA\OA.IBLL\bin\Debug\OA.Model.dll
+E:\C#\OA\OA.IBLL\bin\Debug\Newtonsoft.Json.dll
 E:\C#\OA\OA.IBLL\bin\Debug\EntityFramework.dll
 E:\C#\OA\OA.IBLL\bin\Debug\OA.IDAL.pdb
 E:\C#\OA\OA.IBLL\bin\Debug\OA.Model.pdb
+E:\C#\OA\OA.IBLL\bin\Debug\Newtonsoft.Json.xml
 E:\C#\OA\OA.IBLL\bin\Debug\EntityFramework.xml
 E:\C#\OA\OA.IBLL\bin\Debug\zh-Hans\EntityFramework.resources.dll
 E:\C#\OA\OA.IBLL\obj\Debug\OA.IBLL.csprojResolveAssemblyReference.cache

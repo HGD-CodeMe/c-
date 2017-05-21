@@ -54,6 +54,7 @@ E:\C#\OA\OA.WebApp\bin\System.Web.WebPages.Deployment.dll
 E:\C#\OA\OA.WebApp\bin\System.Web.WebPages.dll
 E:\C#\OA\OA.WebApp\bin\System.Web.WebPages.Razor.dll
 E:\C#\OA\OA.WebApp\bin\WebGrease.dll
+E:\C#\OA\OA.WebApp\bin\Workflow.dll
 E:\C#\OA\OA.WebApp\bin\DALFactory.dll
 E:\C#\OA\OA.WebApp\bin\OA.BLL.pdb
 E:\C#\OA\OA.WebApp\bin\OA.Common.pdb
@@ -61,6 +62,7 @@ E:\C#\OA\OA.WebApp\bin\OA.DAL.pdb
 E:\C#\OA\OA.WebApp\bin\OA.IBLL.pdb
 E:\C#\OA\OA.WebApp\bin\OA.IDAL.pdb
 E:\C#\OA\OA.WebApp\bin\OA.Model.pdb
+E:\C#\OA\OA.WebApp\bin\Workflow.pdb
 E:\C#\OA\OA.WebApp\bin\Microsoft.AI.DependencyCollector.xml
 E:\C#\OA\OA.WebApp\bin\Microsoft.AI.ServerTelemetryChannel.xml
 E:\C#\OA\OA.WebApp\bin\Microsoft.AI.Web.xml
@@ -113,5 +115,3 @@ E:\C#\OA\OA.WebApp\bin\zh-Hans\Microsoft.Owin.Security.MicrosoftAccount.resource
 E:\C#\OA\OA.WebApp\obj\Debug\OA.WebApp.csprojResolveAssemblyReference.cache
 E:\C#\OA\OA.WebApp\obj\Debug\OA.WebApp.dll
 E:\C#\OA\OA.WebApp\obj\Debug\OA.WebApp.pdb
-E:\C#\OA\OA.WebApp\bin\Workflow.dll
-E:\C#\OA\OA.WebApp\bin\Workflow.pdb

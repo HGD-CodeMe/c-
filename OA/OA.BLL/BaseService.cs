@@ -1,4 +1,5 @@
 ﻿
+using OA.DALFactory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,7 @@ namespace OA.BLL
             get
             {
                 //这样导致每次请求都会new 一个对象
-                // return new DbSession();//暂时
+                //return new DBSession();//暂时
                 return DALFactory.DBSessionFactory.CreateDbSession();
             }
         }
@@ -43,13 +44,18 @@ namespace OA.BLL
         public bool DeleteEntity(T entity)
         {
             CurrentDal.DeleteEntity(entity);
+
             return this.GetCurrentDbSession.SaveChanges();
+         
+            
+          
         }
 
         public bool EditEntity(T entity)
         {
             CurrentDal.EditEntity(entity);
-            return this.GetCurrentDbSession.SaveChanges();   
+            return this.GetCurrentDbSession.SaveChanges();
+          
         }
 
 

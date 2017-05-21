@@ -42,10 +42,10 @@ namespace OA.WebApp.Controllers
                 Remark = remark
             };
 
-            short delFlag = (short)DelFlagEnum.Normarl;
-            var userInfoList=UserInfoService.LoadPageEntities<int>(pageIndex, pageSize, out totalCount, c => c.DelFlag == delFlag, c => c.id, true);
+            //short delFlag = (short)DelFlagEnum.Normarl;
+            //var userInfoList=UserInfoService.LoadPageEntities<int>(pageIndex, pageSize, out totalCount, c => c.DelFlag == delFlag, c => c.id, true);
 
-          //  var userInfoList = UserInfoService.LoadSerachEntities(userInfoParam);
+            var userInfoList = UserInfoService.LoadSerachEntities(userInfoParam);
             var temp = from u in userInfoList
                        select new { ID = u.id, UserName = u.UName, UserPass = u.UPwd, Remark = u.Remark, RegTime = u.SubTime };
             return Json(new { rows = temp, total = userInfoParam.TotalCount }, JsonRequestBehavior.AllowGet);
@@ -77,6 +77,7 @@ namespace OA.WebApp.Controllers
         #region 添加用户信息
         public ActionResult AddUserInfo(UserInfo userInfo)
         {
+                    
             userInfo.DelFlag = 0;
             userInfo.ModeifiedOn = DateTime.Now;
             userInfo.SubTime = DateTime.Now;
@@ -108,6 +109,8 @@ namespace OA.WebApp.Controllers
         public ActionResult EditUserInfo(UserInfo userInfo)
         {
             userInfo.ModeifiedOn = DateTime.Now;
+            //这一句话不写 默认时间回报错；
+            userInfo.SubTime = DateTime.Now;
             if (UserInfoService.EditEntity(userInfo))
             {
                 return Content("ok");

@@ -14,7 +14,7 @@ namespace OA.Model
     using System.Collections.Generic;
     
     
-    
+     using Newtonsoft.Json;
     public partial class ActionInfo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -37,16 +37,16 @@ namespace OA.Model
         public string ControllerName { get; set; }
         public string ActionInfoName { get; set; }
         public string Sort { get; set; }
-        public string ActionTypeEnum { get; set; }
+        public Nullable<short> ActionTypeEnum { get; set; }
         public string MenuIcon { get; set; }
     
-    	
+    	  [JsonIgnore]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<user_action> user_action { get; set; }
-    	
+    	  [JsonIgnore]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Department> Department { get; set; }
-    	
+    	  [JsonIgnore]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RoleInfo> RoleInfo { get; set; }
     }

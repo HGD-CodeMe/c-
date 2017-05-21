@@ -18,11 +18,11 @@ namespace OA.DAL
         /// <returns></returns>
         public static DbContext CreateDbContext()
         {
-            DbContext dbContext = (DbContext)CallContext.GetData("dbContext");
+            DbContext dbContext = (DbContext)CallContext.GetData("DbContext");
             if(dbContext == null)
             {
                 dbContext = new OAEntities();
-                CallContext.SetData(" dbContext", dbContext);
+                CallContext.SetData("DbContext", dbContext);
             }
             return dbContext;
         }

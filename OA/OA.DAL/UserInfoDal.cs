@@ -13,7 +13,7 @@ namespace OA.DAL
     public partial class UserInfoDal : BaseDal<UserInfo>,IUserInfoDal
     {
         //定义自己特有的方法
-       
+      
     }
 
     public partial class RoleInfoDal : BaseDal<RoleInfo>, IRoleInfoDal

@@ -214,12 +214,23 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Config\controllers.xml" />
-    <Content Include="Config\service.xml" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\0009021138256688_b.jpg" />
+    <Content Include="Content\Images\20080405142043390.png" />
     <Content Include="Content\Images\300001054794129041600357461_950.jpg" />
     <Content Include="Content\Images\43210c41deb2622c08f07b6ee8252e35.jpg" />
+    <Content Include="Content\Images\chuangyixindiantuheisebeijingtupian_3884764.jpg" />
+    <Content Include="Content\Images\Opacity Folder Group.png" />
+    <Content Include="Content\Images\u=1107593671,3740740386&amp;fm=23&amp;gp=0.jpg" />
+    <Content Include="Content\Images\u=1280969485,3187997072&amp;fm=23&amp;gp=0.jpg" />
+    <Content Include="Content\Images\u=2922374014,2853627758&amp;fm=23&amp;gp=0.jpg" />
+    <Content Include="Content\Images\u=3846516314,261579244&amp;fm=23&amp;gp=0.jpg" />
+    <Content Include="Content\Images\u=402927861,880493478&amp;fm=23&amp;gp=0.jpg" />
+    <Content Include="Content\Images\u=841632563,3636299209&amp;fm=214&amp;gp=0.jpg" />
+    <Content Include="Content\Images\u=93105718,2177601362&amp;fm=23&amp;gp=0.jpg" />
+    <Content Include="Content\jquery.ui.all.css" />
+    <Content Include="Content\smartMenu.css" />
     <Content Include="Content\tableStyle.css" />
     <Content Include="Error.html" />
     <Content Include="favicon.ico" />
@@ -238,8 +249,11 @@
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
+    <Content Include="Scripts\jquery-1.6.2.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
+    <Content Include="Scripts\jquery-smartMenu.js" />
+    <Content Include="Scripts\jquery-ui-1.8.16.custom.js" />
     <Content Include="Scripts\jquery-ui-1.8.20.js" />
     <Content Include="Scripts\jquery-ui-1.8.20.min.js" />
     <Content Include="Scripts\jquery.easyui.min.js" />
@@ -249,12 +263,14 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jquery.winResize.js" />
     <Content Include="Scripts\kindeditor-all-min.js" />
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\MyAjaxForm.js" />
+    <Content Include="Scripts\myLib.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
@@ -302,12 +318,15 @@
     <Content Include="Views\WfTemp\createTemp.cshtml" />
     <Content Include="Views\WfInstance\Index.cshtml" />
     <Content Include="Views\WfInstance\StartWorkflow.cshtml" />
+    <Content Include="Views\RoleInfo\ShowEditInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\icon\" />
     <Folder Include="Content\kinder\" />
     <Folder Include="Content\lib\" />
     <Folder Include="Content\themes\" />
+    <Folder Include="Content\wallpapers\" />
     <Folder Include="MenuIcon\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>

@@ -117,11 +117,8 @@ namespace OA.WebApp.Controllers
             if(Request.Cookies["cp1"] != null || Request.Cookies["cp2"] != null)
             {
                 //用户退出清除cookie中的登录信息
-                HttpCookie cookie1 = Request.Cookies["cp1"];
-                HttpCookie cookie2 = Request.Cookies["cp2"];
-
-                cookie1.Expires = DateTime.Now.AddDays(-1);
-                cookie2.Expires = DateTime.Now.AddDays(-1);
+                Response.Cookies["cp1"].Expires = DateTime.Now.AddDays(-1);
+                Response.Cookies["cp2"].Expires = DateTime.Now.AddDays(-1);
             }
             return Redirect("/Login/Index");
         }

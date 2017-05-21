@@ -10,6 +10,14 @@
     <title>为用户分配角色</title>
     <script src="~/Scripts/jquery-1.7.1.min.js"></script>
     <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script type="text/javascript">
+        function subForm() {
+            $("#setUserRoleForm").submit();
+        }
+        function afterSet(data) {
+            window.parent.afterSetUserRole(data);
+        }
+    </script>
 </head>
 <body>
     <div>
@@ -17,8 +25,9 @@
             UserInfo userInfo = ViewBag.UserInfo;
             @userInfo.UName
         } 分配角色
-        @using (Ajax.BeginForm("SetUserRole", "UserInfo", new { }, new AjaxOptions() { HttpMethod = "post", OnSuccess = "afterSet" }, new { id = "form1" }))
+        @using (Ajax.BeginForm("SetUserRole", "UserInfo", new { }, new AjaxOptions() { HttpMethod = "post", OnSuccess = "afterSet" }, new { id = "setUserRoleForm" }))
         {
+            <input type="hidden" name="userId" value="@userInfo.id" />
             List<RoleInfo> roleInfoList = ViewBag.AllRoleInfo;
             List<int> roleInfoIdList = ViewBag.AllExtRoleId;
             foreach (RoleInfo roleInfo in roleInfoList)

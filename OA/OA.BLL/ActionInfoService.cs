@@ -24,7 +24,7 @@ namespace OA.BLL
                     var roleInfo = this.GetCurrentDbSession.RoleInfoDal.LoadEntities(r => r.ID == roleId).FirstOrDefault();
                     actionInfo.RoleInfo.Add(roleInfo);
                 }
-                return this.GetCurrentDbSession.SaveChanges();
+                return true;
             }
             else
             {

@@ -12,7 +12,6 @@ namespace OA.WebApp.Controllers
     public class HomeController : BaseController
     {
         IBLL.IUserInfoService UserInfoService = new UserInfoService();
-        UserInfo LoginUser = new UserInfo();
         public ActionResult Index()
         {
             return View();
@@ -23,52 +22,70 @@ namespace OA.WebApp.Controllers
             return View();
         }
 
-        #region 菜单权限过滤
-        public ActionResult GetMenus()
+        #region 过滤登录用户的菜单权限（这一段不是我写的）
+        /// <summary>
+        /// 1: 可以按照用户---角色---权限这条线找出登录用户的权限，放在一个集合中。
+        /// 2：可以按照用户---权限这条线找出用户的权限，放在一个集合中。
+        /// 3：将这两个集合合并成一个集合。
+        /// 4：把禁止的权限从总的集合中清除。
+        /// 5：将总的集合中的重复权限清除。
+        /// 6：把过滤好的菜单权限生成JSON返回。
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Getmenus()
         {
-            //根据用户角色权限，将菜单权限取出来
-            var loginUserInfo = UserInfoService.LoadEntities
-                (u => u.id == LoginUser.id).FirstOrDefault();
+            //1: 可以按照用户---角色---权限这条线找出登录用户的权限，放在一个集合中。
+            //获取登录用户的信息
+            var userInfo = UserInfoService.LoadEntities(u => u.id == loginUser.id).FirstOrDefault();
+            //获取登录用户的角色.
+            var userRoleInfo = userInfo.RoleInfo;
+            //根据登录用户的角色获取对应的菜单权限。
+            short actionTypeEnum = (short)ActionInfoType.MenuActionTypeEnum;
+            var loginUserMenuActions = (from r in userRoleInfo
+                                        from a in r.ActionInfo
+                                        where a.ActionTypeEnum == actionTypeEnum
+                                        select a).ToList();
 
-            var loginUserRoleInfo = loginUserInfo.RoleInfo;//获取登录用户的角色信息
-
-            //todo 这里可能有问题
-            string actionTypeEnum = Convert.ToString(ActionInfoType.MenuActionTypeEnum);
-
-            //查询角色所对应的菜单权限
-            var loginUserActionInfos = (from r in loginUserRoleInfo
-                                       from a in r.ActionInfo
-                                       where a.ActionTypeEnum == actionTypeEnum
-                                       select a).ToList();
+            //下面语句是错误的，allUserActions是一个大集合该集合中包含了很多小的集合，所以变量b为集合类型
+            //var allUserActions = from r in userRoleInfo
+            //                     select r.ActionInfo;
+            //var mm = from b in allUserActions
+            //         where b.ActionTypeEnum == actionTypeEnum
+            //         select b;
 
 
-            //根据用户---权限,根据用户查询中间表，然后利用导航属性查询权限表
-            var login_r_user_action = from r in loginUserInfo.user_action
-                                      select r.ActionInfo;
+            // 2：可以按照用户---权限这条线找出用户的权限，放在一个集合中。
+            var userActions = from a in userInfo.user_action
+                              select a.ActionInfo;
 
-            var loginMenuAction = (from r in login_r_user_action
-                                   where r.ActionTypeEnum == actionTypeEnum
-                                   select r).ToList();
+            var userMenuActions = (from a in userActions
+                                   where a.ActionTypeEnum == actionTypeEnum
+                                   select a).ToList();
 
-            //将两个集合合并
-            loginUserActionInfos.AddRange(loginMenuAction);
+            // a.ActionInfo不是一个集合,注意理解权限表与用户权限关系表之间的对应关系
+            //var userMenuActionse = from a in userInfo.R_UserInfo_ActionInfo
+            //                       from b in a.ActionInfo
+            //                       where b.ActionTypeEnum == actionTypeEnum
+            //                       select b;
 
-            //查询登录用户所禁止的权限编号
-            var loginForbActionInfo = (from r in loginUserInfo.user_action
-                                      where r.isPass == false
-                                      select r.Act_ID).ToList();
 
-            //将禁止的权限过滤
-            var loginUserAllowActionList = loginUserActionInfos.Where(a => !loginForbActionInfo.Contains(a.ID));
-            //去除重复的权限
-            var loginUserAllowActionLists = loginUserAllowActionList.Distinct(new EqualityComparer());
 
-            var returnActionList = from a in loginUserAllowActionLists
-                                   select new { icon = a.MenuIcon, title = a.ActionInfoName, url = a.Url };
+            //3：将这两个集合合并成一个集合。
+            loginUserMenuActions.AddRange(userMenuActions);
 
-            return Json(returnActionList, JsonRequestBehavior.AllowGet);
+            //4：把禁止的权限从总的集合中清除。
+            var forbidActions = (from a in userInfo.user_action
+                                 where a.isPass == false
+                                 select a.Act_ID).ToList();
+            var loginUserAllowActions = loginUserMenuActions.Where(a => !forbidActions.Contains(a.ID));
+
+            //5：将总的集合中的重复权限清除。
+            var lastLoginUserActions = loginUserAllowActions.Distinct(new EqualityComparer());
+            //6：把过滤好的菜单权限生成JSON返回。
+            var temp = from a in lastLoginUserActions
+                       select new { icon = a.MenuIcon, title = a.ActionInfoName, url = a.Url };
+            return Json(temp, JsonRequestBehavior.AllowGet);
         }
-
         #endregion
     }
 }

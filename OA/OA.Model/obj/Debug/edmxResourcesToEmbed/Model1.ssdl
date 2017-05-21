@@ -4,7 +4,7 @@
     <Key>
       <PropertyRef Name="ID" />
     </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="SubTime" Type="datetime" />
     <Property Name="DelFlag" Type="smallint" />
     <Property Name="ModifiedOn" Type="datetime" />
@@ -15,7 +15,7 @@
     <Property Name="ControllerName" Type="varchar" MaxLength="255" />
     <Property Name="ActionInfoName" Type="varchar" MaxLength="255" />
     <Property Name="Sort" Type="varchar" MaxLength="16" />
-    <Property Name="ActionTypeEnum" Type="varchar" MaxLength="255" />
+    <Property Name="ActionTypeEnum" Type="smallint" />
     <Property Name="MenuIcon" Type="varchar" MaxLength="255" />
   </EntityType>
   <EntityType Name="Department">
@@ -49,7 +49,7 @@
     <Key>
       <PropertyRef Name="ID" />
     </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="RoleName" Type="varchar" MaxLength="32" />
     <Property Name="DelFlag" Type="smallint" />
     <Property Name="SubTime" Type="datetime" />
@@ -61,7 +61,7 @@
     <Key>
       <PropertyRef Name="ID" />
     </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="User_ID" Type="int" Nullable="false" />
     <Property Name="Act_ID" Type="int" Nullable="false" />
     <Property Name="isPass" Type="bit" />
@@ -78,7 +78,7 @@
     <Key>
       <PropertyRef Name="id" />
     </Key>
-    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Dep_ID" Type="int" />
     <Property Name="UName" Type="varchar" MaxLength="20" />
     <Property Name="UPwd" Type="varchar" MaxLength="32" />

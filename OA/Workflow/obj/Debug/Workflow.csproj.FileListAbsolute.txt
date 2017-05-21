@@ -1,3 +1,5 @@
+E:\C#\OA\Workflow\bin\Debug\Workflow.dll
+E:\C#\OA\Workflow\bin\Debug\Workflow.pdb
 E:\C#\OA\Workflow\obj\Debug\FincalActivity.g.xaml
 E:\C#\OA\Workflow\obj\Debug\Workflow_FincalActivity_BeforeInitializeComponentHelper.txt
 E:\C#\OA\Workflow\obj\Debug\_Workflow.g.cs
@@ -9,6 +11,4 @@ E:\C#\OA\Workflow\obj\Debug\Workflow.dll
 E:\C#\OA\Workflow\obj\Debug\Workflow.pdb
 E:\C#\OA\Workflow\obj\Debug\Workflow_FincalActivity_CompiledExpressionRoot.cs
 E:\C#\OA\Workflow\obj\Debug\AC2C1ABA-CCF6-44D4-8127-588FD4D0A860-DeferredValidationErrors.xml
-E:\C#\OA\Workflow\bin\Debug\Workflow.dll
-E:\C#\OA\Workflow\bin\Debug\Workflow.pdb
 E:\C#\OA\Workflow\obj\Debug\Workflow.csprojResolveAssemblyReference.cache

@@ -11,10 +11,10 @@ namespace OA.Model.Enum
         /// <summary>
         /// 普通用户权限
         /// </summary>
-        NormarActionTypeEnum=0,
+        NormarActionTypeEnum = 0,
         /// <summary>
         /// 菜单权限
         /// </summary>
-        MenuActionTypeEnum=1
+        MenuActionTypeEnum = 1
     }
 }
